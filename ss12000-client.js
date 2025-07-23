@@ -1,26 +1,26 @@
 // ss12000-client.js
 /**
- * @file Node.js-klientbibliotek för SS12000 API:et.
- * Detta bibliotek tillhandahåller funktioner för att interagera med SS12000 API:et
- * baserat på den tillhandahållna OpenAPI-specifikationen.
- * Inkluderar grundläggande HTTP-anrop och hantering av Bearer Token-autentisering.
+ * @file Node.js client package for the SS12000 API.
+ * This package contains functions that allows for a solution to easily integrate with the SS12000 API
+ * based on the available OpenAPI specification.
+ * This includes basic HTTP calls and handling of Bearer Token authentication.
  */
 
-const fetch = require('node-fetch'); // Använd node-fetch för HTTP-anrop i Node.js
+const fetch = require('node-fetch'); // uses node-fetch for HTTP calls Node.js
 
 /**
- * SS12000 API Klient
+ * SS12000 API Client
  * @class
- * @param {string} baseUrl - Bas-URL för SS12000 API:et (t.ex. "http://some.server.se/v2.0").
- * @param {string} authToken - JWT Bearer Token för autentisering.
+ * @param {string} baseUrl - Base URL for the SS12000 API server.
+ * @param {string} authToken - JWT Bearer Token.
  */
 class SS12000Client {
     constructor(baseUrl, authToken) {
         if (!baseUrl) {
-            throw new Error('Base URL är obligatorisk för SS12000Client.');
+            throw new Error('Base URL is mandatory for the SS12000Client.');
         }
         if (!authToken) {
-            console.warn('Varning: Autentiseringstoken saknas. Anrop kan misslyckas om API:et kräver autentisering.');
+            console.warn('Warning: Authentication token missing. Calls can fail if the API requires authentication.');
         }
         this.baseUrl = baseUrl;
         this.headers = {
@@ -33,12 +33,12 @@ class SS12000Client {
     }
 
     /**
-     * Utför ett generiskt GET-anrop mot API:et.
+     * Perform a generic GET call to the API.
      * @private
-     * @param {string} path - API-sökvägen (t.ex. "/organisations").
-     * @param {Object} [params={}] - Query-parametrar.
-     * @returns {Promise<Object>} - Svaret från API:et.
-     * @throws {Error} Om anropet misslyckas.
+     * @param {string} path - API path (e.g. "/organisations").
+     * @param {Object} [params={}] - Query parameter.
+     * @returns {Promise<Object>} - API response.
+     * @throws {Error} If fail = Error.
      */
     async _get(path, params = {}) {
         const url = new URL(`${this.baseUrl}${path}`);
@@ -60,22 +60,22 @@ class SS12000Client {
 
             if (!response.ok) {
                 const errorBody = await response.json().catch(() => ({ message: response.statusText }));
-                throw new Error(`API-anrop misslyckades: ${response.status} ${response.statusText} - ${JSON.stringify(errorBody)}`);
+                throw new Error(`API call failed: ${response.status} ${response.statusText} - ${JSON.stringify(errorBody)}`);
             }
             return response.json();
         } catch (error) {
-            console.error(`Fel vid GET-anrop till ${url.toString()}:`, error);
+            console.error(`Error when performing GET call to ${url.toString()}:`, error);
             throw error;
         }
     }
 
     /**
-     * Utför ett generiskt POST-anrop mot API:et.
+     * Perform a generic POST call to the API.
      * @private
-     * @param {string} path - API-sökvägen (t.ex. "/organisations/lookup").
-     * @param {Object} body - Request-body.
-     * @returns {Promise<Object>} - Svaret från API:et.
-     * @throws {Error} Om anropet misslyckas.
+     * @param {string} path - API path (e.g. "/organisations/lookup").
+     * @param {Object} body - Request body.
+     * @returns {Promise<Object>} - API response.
+     * @throws {Error} If fail = Error.
      */
     async _post(path, body) {
         const url = new URL(`${this.baseUrl}${path}`);
@@ -89,21 +89,21 @@ class SS12000Client {
 
             if (!response.ok) {
                 const errorBody = await response.json().catch(() => ({ message: response.statusText }));
-                throw new Error(`API-anrop misslyckades: ${response.status} ${response.statusText} - ${JSON.stringify(errorBody)}`);
+                throw new Error(`API call failed: ${response.status} ${response.statusText} - ${JSON.stringify(errorBody)}`);
             }
             return response.json();
         } catch (error) {
-            console.error(`Fel vid POST-anrop till ${url.toString()}:`, error);
+            console.error(`Error when performing POST call to ${url.toString()}:`, error);
             throw error;
         }
     }
 
     /**
-     * Utför ett generiskt DELETE-anrop mot API:et.
+     * Perform a generic DELETE call to the API.
      * @private
-     * @param {string} path - API-sökvägen (t.ex. "/attendances/{id}").
-     * @returns {Promise<void>} - Ingen retur vid framgång.
-     * @throws {Error} Om anropet misslyckas.
+     * @param {string} path - API path (e.g. "/attendances/{id}").
+     * @returns {Promise<void>} - No return when successful.
+     * @throws {Error} if fail = Error.
      */
     async _delete(path) {
         const url = new URL(`${this.baseUrl}${path}`);
@@ -115,26 +115,26 @@ class SS12000Client {
             });
 
             if (response.status === 204) {
-                return; // 204 No Content indikerar framgångsrik borttagning
+                return; // 204 No Content indicates successful deletion
             }
 
             if (!response.ok) {
                 const errorBody = await response.json().catch(() => ({ message: response.statusText }));
-                throw new Error(`API-anrop misslyckades: ${response.status} ${response.statusText} - ${JSON.stringify(errorBody)}`);
+                throw new Error(`API call failed: ${response.status} ${response.statusText} - ${JSON.stringify(errorBody)}`);
             }
         } catch (error) {
-            console.error(`Fel vid DELETE-anrop till ${url.toString()}:`, error);
+            console.error(`Error when performing DELETE call to ${url.toString()}:`, error);
             throw error;
         }
     }
 
     /**
-     * Utför ett generiskt PATCH-anrop mot API:et.
+     * Perform a generic PATCH call to the API.
      * @private
-     * @param {string} path - API-sökvägen (t.ex. "/subscriptions/{id}").
-     * @param {Object} body - Request-body.
-     * @returns {Promise<Object>} - Svaret från API:et.
-     * @throws {Error} Om anropet misslyckas.
+     * @param {string} path - API path (e.g. "/subscriptions/{id}").
+     * @param {Object} body - Request body.
+     * @returns {Promise<Object>} - API response.
+     * @throws {Error} if fail = error.
      */
     async _patch(path, body) {
         const url = new URL(`${this.baseUrl}${path}`);
@@ -148,11 +148,11 @@ class SS12000Client {
 
             if (!response.ok) {
                 const errorBody = await response.json().catch(() => ({ message: response.statusText }));
-                throw new Error(`API-anrop misslyckades: ${response.status} ${response.statusText} - ${JSON.stringify(errorBody)}`);
+                throw new Error(`API call failed: ${response.status} ${response.statusText} - ${JSON.stringify(errorBody)}`);
             }
             return response.json();
         } catch (error) {
-            console.error(`Fel vid PATCH-anrop till ${url.toString()}:`, error);
+            console.error(`Error when performing PATCH call to ${url.toString()}:`, error);
             throw error;
         }
     }
@@ -161,26 +161,26 @@ class SS12000Client {
 
     /**
      * Hämta en lista med organisationer.
-     * @param {Object} [params={}] - Filterparametrar.
-     * @param {string[]} [params.parent] - Begränsa urvalet till utpekade organisations-ID:n.
-     * @param {string[]} [params.schoolUnitCode] - Begränsa urvalet till de skolenheter som har den angivna Skolenhetskoden.
-     * @param {string[]} [params.organisationCode] - Begränsa urvalet till de organisationselement som har den angivna koden.
-     * @param {string} [params.municipalityCode] - Begränsa urvalet till de organisationselement som har angiven kommunkod.
-     * @param {string[]} [params.type] - Begränsa urvalet till utpekade typ (t.ex. "Huvudman", "Skolenhet").
-     * @param {string[]} [params.schoolTypes] - Begränsa urvalet till de organisationselement som har den angivna skolformen.
-     * @param {string} [params.startDateOnOrBefore] - Begränsa urvalet till organisationselement som har ett startDate värde innan eller på det angivna datumet (RFC 3339-format).
-     * @param {string} [params.startDateOnOrAfter] - Begränsa urvalet till organisationselement som har ett startDate värde på eller efter det angivna datumet (RFC 3339-format).
-     * @param {string} [params.endDateOnOrBefore] - Begränsa urvalet till organisationselement som har ett endDate värde innan eller på det angivna datumet (RFC 3339-format).
-     * @param {string} [params.endDateOnOrAfter] - Begränsa urvalet till organisationselement som har ett endDate värde på eller efter det angivna datumet (RFC 3339-format).
-     * @param {string} [params.metaCreatedBefore] - Endast poster skapade på eller före detta timestamp (RFC 3339 format).
-     * @param {string} [params.metaCreatedAfter] - Endast poster skapade efter detta timestamp (RFC 3339 format).
-     * @param {string} [params.metaModifiedBefore] - Endast poster modifierade på eller före detta timestamp (RFC 3339 format).
-     * @param {string} [params.metaModifiedAfter] - Endast poster modifierade efter detta timestamp (RFC 3339 format).
-     * @param {boolean} [params.expandReferenceNames] - Returnera `displayName` för alla refererade objekt.
-     * @param {string} [params.sortkey] - Anger hur resultatet ska sorteras (t.ex. "ModifiedDesc", "DisplayNameAsc").
-     * @param {number} [params.limit] - Antal poster som ska visas i resultatet.
-     * @param {string} [params.pageToken] - Ett opakt värde som servern givit som svar på en tidigare ställd fråga.
-     * @returns {Promise<Object>} - En lista med organisationer.
+     * @param {Object} [params={}] - Filter parameters.
+     * @param {string[]} [params.parent] - Limit selection to the submitted ID.
+     * @param {string[]} [params.schoolUnitCode] - ... the school units matching the submitted school unit code.
+     * @param {string[]} [params.organisationCode] - ... the organisation elements that matches the submitted code.
+     * @param {string} [params.municipalityCode] - ... the elements that matches the submitted municipality code.
+     * @param {string[]} [params.type] - ... to the chosen type (e.g. "Huvudman", "Skolenhet").
+     * @param {string[]} [params.schoolTypes] - ... to elements with the given school type.
+     * @param {string} [params.startDateOnOrBefore] - ... to elements that has a value before or on the given date (RFC 3339 format).
+     * @param {string} [params.startDateOnOrAfter] - ... to elements that has a value on or after the given date (RFC 3339 format).
+     * @param {string} [params.endDateOnOrBefore] - ... to elements that have an end date before or on the given date (RFC 3339 format).
+     * @param {string} [params.endDateOnOrAfter] - ... to elements that have an end date on or after the given date (RFC 3339 format).
+     * @param {string} [params.metaCreatedBefore] - ... to elements created on or before the given date (RFC 3339 format).
+     * @param {string} [params.metaCreatedAfter] - ... to elements created after this timestamp (RFC 3339 format).
+     * @param {string} [params.metaModifiedBefore] - ... to elements that have been modified before this timestamp (RFC 3339 format).
+     * @param {string} [params.metaModifiedAfter] - ... to elements have been modified after this timestamp (RFC 3339 format).
+     * @param {boolean} [params.expandReferenceNames] - Return `displayName` for all refered objects.
+     * @param {string} [params.sortkey] - Sort order (e.g. "ModifiedDesc", "DisplayNameAsc").
+     * @param {number} [params.limit] - Number of entities to show.
+     * @param {string} [params.pageToken] - An opaque value that the server has returned to a previous query.
+     * @returns {Promise<Object>} - A list of organisations.
      */
     async getOrganisations(params = {}) {
         const mappedParams = {
@@ -207,13 +207,13 @@ class SS12000Client {
     }
 
     /**
-     * Hämta många organisationer baserat på en lista av ID:n.
-     * @param {Object} body - Request-body.
-     * @param {string[]} [body.ids] - Lista med organisation-ID:n.
-     * @param {string[]} [body.schoolUnitCodes] - Lista med skolenhetskoder.
-     * @param {string[]} [body.organisationCodes] - Lista med organisationskoder.
-     * @param {boolean} [expandReferenceNames] - Returnera `displayName` för alla refererade objekt.
-     * @returns {Promise<Object>} - En lista med organisationer.
+     * Fetch many organisations based on a list of IDs.
+     * @param {Object} body - Request body.
+     * @param {string[]} [body.ids] - List of organisation IDs.
+     * @param {string[]} [body.schoolUnitCodes] - List of school unit codes.
+     * @param {string[]} [body.organisationCodes] - List of organisation codes.
+     * @param {boolean} [expandReferenceNames] - Return `displayName` for all refered objects.
+     * @returns {Promise<Object>} - A list of organisations.
      */
     async lookupOrganisations(body, expandReferenceNames = false) {
         const params = { expandReferenceNames };
@@ -243,10 +243,10 @@ class SS12000Client {
     }
 
     /**
-     * Hämta en organisation baserat på ID.
-     * @param {string} id - ID för organisationen.
-     * @param {boolean} [expandReferenceNames] - Returnera `displayName` för alla refererade objekt.
-     * @returns {Promise<Object>} - Organisationsobjektet.
+     * Fetch an organisation based on ID.
+     * @param {string} id - ID for the organisation.
+     * @param {boolean} [expandReferenceNames] - Return `displayName` for all refered objects.
+     * @returns {Promise<Object>} - Organisation objects.
      */
     async getOrganisationById(id, expandReferenceNames = false) {
         const params = { expandReferenceNames };
@@ -256,7 +256,7 @@ class SS12000Client {
     // --- Person Endpoints ---
 
     /**
-     * Hämta en lista med personer.
+     * Fetch a list of persons.
      * @param {Object} [params={}] - Filterparametrar.
      * @param {string[]} [params.nameContains] - Begränsa urvalet till de personer vars namn innehåller något av parameterns värden.
      * @param {string} [params.civicNo] - Begränsa urvalet till den person vars civicNo matchar parameterns värde.
