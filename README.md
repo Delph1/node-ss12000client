@@ -29,9 +29,10 @@ All dates are in the RFC 3339 format, we're not cavemen here.
 
 ## **Installation**
 
-1. **Save the client:** Save ss12000-client.js to your project folder.  
-2. **Install depencies:** This package uses node-fetch to make HTTP calls. If you are planning to do the webhook example you will also need express and body-parser:  
-   
+1. **Save the client:** Save ss12000-client.js to your project folder, or:
+```npm i @andreas_galistel/ss12000client```
+
+3. **Install depencies:** This package uses node-fetch to make HTTP calls. If you are planning to do the webhook example you will also need express and body-parser:  
 ```npm install node-fetch express body-parser```
 
 ## **Usage**
