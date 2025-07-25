@@ -19,6 +19,11 @@ class SS12000Client {
         if (!baseUrl) {
             throw new Error('Base URL is mandatory for the SS12000Client.');
         }
+        
+        if (!baseUrl.startsWith('https://')) {
+            console.warn('Varning: Base URL is not using HTTPS. This is insecure and very much NOT recommended.');
+        }
+        
         if (!authToken) {
             console.warn('Warning: Authentication token missing. Calls can fail if the API requires authentication.');
         }
