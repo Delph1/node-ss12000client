@@ -1,10 +1,14 @@
 # **SS12000 Node.js client package**
 
-This is a Node.js client package (or library if you will) that aims to simplify the integration with a server running a SS12000-compatible API. It is based on the OpenAPI 3 specification basically and it is really not that complicated to be honest. The package handles HTTP  calls and Bearer Token authentication, and is designed to provide a structured method for integrating with all of the defined endpoints of the standard. 
+This is a Node.js client package (or library if you will) that aims to simplify the integration with a server running a SS12000 compatible API. It is based on the OpenAPI 3 specification basically and it is really not that complicated to be honest. The package handles HTTP  calls and Bearer Token authentication, and is designed to provide a structured method for integrating with all of the defined endpoints of the standard. 
+
+You can download your own personal copy of the SS12000 standard for free from here: [sis.se](https://www.sis.se/standarder/kpenstandard/forkopta-standarder/informationshantering-inom-utbildningssektorn/).
 
 ### **Important**
 
 The SS12000 does not require the server to support all of the endpoints. You need to actually look at the server documentation to see which endpoints that are actually available with each service. Adding some sort of discovery service is beyond the scope of this small library in my humble opinion.
+
+All dates are in the RFC 3339 format, we're not cavemen here. 
 
 ## **Content**
 
@@ -18,7 +22,7 @@ The SS12000 does not require the server to support all of the endpoints. You nee
     - [**Fetch Persons**](#fetch-persons)
     - [**Fetch ...**](#fetch-)
     - [**Webhooks for Subscriptions**](#webhooks-for-subscriptions)
-  - [**API-referens**](#api-referens)
+  - [**API referense**](#api-referense)
   - [**Webhooks receiver (example)**](#webhooks-receiver-example)
   - [**Contribute**](#contribute)
   - [**License**](#license)
@@ -131,7 +135,7 @@ async function manageSubscriptions() {
 // manageSubscriptions(); // Avkommentera för att köra
 ```
 
-## **API-referens**
+## **API referense**
 
 SS12000Client is designed to expose methods for all SS12000 API endpoints. Here is a list of the primary endpoints that are defined in the OpenAPI specification:
 
@@ -196,6 +200,8 @@ SS12000Client is designed to expose methods for all SS12000 API endpoints. Here 
 * /statistics
 
 Each method accepts the parameters that are equivalent to the API query parameters and request bodies, all according to the OpenAPI specification. Detailed information on available parameters is in the JSDoc comments in the main file ss12000-client.js.
+
+The .yaml file can be downloaded from the SS12000 site over at [sis.se](https://www.sis.se/standardutveckling/tksidor/tk400499/sistk450/ss-12000/). 
 
 ## **Webhooks receiver (example)**
 
