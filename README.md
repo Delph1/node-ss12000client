@@ -43,8 +43,8 @@ To start using the client, import it and create an instance of the client inputi
 ```
 const SS12000Client = require('./ss12000-client'); //or wherever you placed the file within your project. 
 
-const baseUrl = 'http://some.server.com/v2.0'; // Base URL goes here  
-const authToken = 'JWT_TOKEN_HERE'; // Insert actual JWT token here
+const baseUrl = 'https://some.server.com/v2.0'; // Base URL goes here  
+const authToken = 'JWT_TOKEN_HERE'; // Insert actual JWT token here (from an environment variable or somewhere safe of course.)
 
 const client = new SS12000Client(baseUrl, authToken);
 ```
