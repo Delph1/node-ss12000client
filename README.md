@@ -29,9 +29,9 @@ All dates are in the RFC 3339 format, we're not cavemen here.
 
 ## **Installation**
 
-1. **Spara klienten:** Spara koden från ss12000-client.js i din projektkatalog.  
-2. **Installera beroenden:** Detta bibliotek använder node-fetch för att göra HTTP-anrop. Om du planerar att använda webhook-mottagarexemplet behöver du även express och body-parser.  
-   npm install node-fetch express body-parser
+1. **Save the client:** Save ss12000-client.js to your project folder.  
+2. **Install depencies:** This package uses node-fetch to make HTTP calls. If you are planning to do the webhook example you will also need express and body-parser:  
+   ```npm install node-fetch express body-parser```
 
 ## **Usage**
 
@@ -40,7 +40,7 @@ All dates are in the RFC 3339 format, we're not cavemen here.
 To start using the client, import it and create an instance of the client inputing the API base url and your JWT Bearer Token.  
 
 ```
-const SS12000Client = require('./ss12000-client');
+const SS12000Client = require('./ss12000-client'); //or wherever you placed the file within your project. 
 
 const baseUrl = 'http://some.server.com/v2.0'; // Base URL goes here  
 const authToken = 'JWT_TOKEN_HERE'; // Insert actual JWT token here
@@ -99,40 +99,40 @@ Check the API reference below to see all available nodes.
 
 ### **Webhooks for Subscriptions**
 
-Klienten tillhandahåller metoder för att hantera prenumerationer (webhooks).
+The client also contains methods to manage subscriptions (webhooks).
 ```
 async function manageSubscriptions() {  
     try {  
-        console.log('Hämtar prenumerationer...');  
-        const subscriptions \= await client.getSubscriptions();  
-        console.log('Hämtade prenumerationer:', JSON.stringify(subscriptions, null, 2));
+        console.log('Fetching subscriptions...');  
+        const subscriptions = await client.getSubscriptions();  
+        console.log('Found subscriptions:', JSON.stringify(subscriptions, null, 2));
 
-        // Exempel: Skapa en prenumeration (kräver en publikt tillgänglig webhook-URL)  
+        // Example: Create a subscription (requires a publicly available webhook URL)  
         /\*  
-        console.log('\\nSkapar en prenumeration...');  
-        const newSubscription \= await client.createSubscription({  
-            name: 'Min Testprenumeration',  
-            target: 'http://your-public-webhook-url.com/ss12000-webhook', // Ersätt med din publika URL  
+        console.log('\nCreating a subscription...');  
+        const newSubscription = await client.createSubscription({  
+            name: 'My Test subscription',  
+            target: 'http://your-public-webhook-url.com/ss12000-webhook', // Use actual URL  
             resourceTypes: \[{ resource: 'Person' }, { resource: 'Activity' }\]  
         });  
-        console.log('Skapad prenumeration:', JSON.stringify(newSubscription, null, 2));  
+        console.log('Created subscription:', JSON.stringify(newSubscription, null, 2));  
         \*/
 
-        // Exempel: Ta bort en prenumeration  
+        // Example: Remove a subscription  
         /\*  
         if (subscriptions.data && subscriptions.data.length \> 0\) {  
             const subToDelete \= subscriptions.data\[0\].id;  
-            console.log(\`\\nTar bort prenumeration med ID: ${subToDelete}...\`);  
+            console.log('\nDeleting subscription with ID: ${subToDelete}...\');  
             await client.deleteSubscription(subToDelete);  
-            console.log('Prenumeration borttagen framgångsrikt.');  
+            console.log('Subscription removed successfully.');  
         }  
         \*/  
     } catch (error) {  
-        console.error('Fel vid hantering av prenumerationer:', error.message);  
+        console.error('Error when managing subscriptions:', error.message);  
     }  
 }
 
-// manageSubscriptions(); // Avkommentera för att köra
+// manageSubscriptions(); 
 ```
 
 ## **API referense**
