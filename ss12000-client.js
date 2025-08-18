@@ -183,14 +183,14 @@ class SS12000Client {
      * @param {string} [params.municipalityCode] 
      * @param {string[]} [params.type] - e.g. "Huvudman", "Skolenhet".
      * @param {string[]} [params.schoolTypes] 
-     * @param {string} [params.startDateOnOrBefore] 
-     * @param {string} [params.startDateOnOrAfter] 
-     * @param {string} [params.endDateOnOrBefore] 
-     * @param {string} [params.endDateOnOrAfter] 
-     * @param {string} [params.metaCreatedBefore] 
-     * @param {string} [params.metaCreatedAfter] 
-     * @param {string} [params.metaModifiedBefore] 
-     * @param {string} [params.metaModifiedAfter] 
+     * @param {string} [params.startDate.onOrBefore] 
+     * @param {string} [params.startDate.onOrAfter] 
+     * @param {string} [params.endDate.onOrBefore] 
+     * @param {string} [params.endDate.onOrAfter] 
+     * @param {string} [params.meta.created.before] 
+     * @param {string} [params.meta.created.after] 
+     * @param {string} [params.meta.modified.before] 
+     * @param {string} [params.meta.modified.after] 
      * @param {boolean} [params.expandReferenceNames] 
      * @param {string} [params.sortkey] - Sort order (e.g. "ModifiedDesc", "DisplayNameAsc").
      * @param {number} [params.limit] - Number of entities to show.
@@ -205,14 +205,14 @@ class SS12000Client {
             'municipalityCode': params.municipalityCode,
             'type': params.type,
             'schoolTypes': params.schoolTypes,
-            'startDate.onOrBefore': params.startDateOnOrBefore,
-            'startDate.onOrAfter': params.startDateOnOrAfter,
-            'endDate.onOrBefore': params.endDateOnOrBefore,
-            'endDate.onOrAfter': params.endDateOnOrAfter,
-            'meta.created.before': params.metaCreatedBefore,
-            'meta.created.after': params.metaCreatedAfter,
-            'meta.modified.before': params.metaModifiedBefore,
-            'meta.modified.after': params.metaModifiedAfter,
+            'startDate.onOrBefore': params.startDate.onOrBefore,
+            'startDate.onOrAfter': params.startDate.onOrAfter,
+            'endDate.onOrBefore': params.endDate.onOrBefore,
+            'endDate.onOrAfter': params.endDate.onOrAfter,
+            'meta.created.before': params.meta.created.before,
+            'meta.created.after': params.meta.created.after,
+            'meta.modified.before': params.meta.modified.before,
+            'meta.modified.after': params.meta.modified.after,
             'expandReferenceNames': params.expandReferenceNames,
             'sortkey': params.sortkey,
             'limit': params.limit,
