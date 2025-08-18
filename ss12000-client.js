@@ -6,7 +6,17 @@
  * This includes basic HTTP calls and handling of Bearer Token authentication.
  */
 
-const fetch = require('node-fetch'); // Uses node-fetch for HTTP calls Node.js
+let fetchImpl;
+try {
+    // node-fetch v2 (CJS) exports function, v3 is ESM so may expose default
+    fetchImpl = require('node-fetch');
+    if (fetchImpl && fetchImpl.default) fetchImpl = fetchImpl.default;
+} catch (e) {
+    // Fallback to global fetch (Node 18+)
+    if (typeof fetch !== 'undefined') fetchImpl = fetch;
+    else throw new Error('node-fetch not installed and global fetch not available');
+}
+const fetch = fetchImpl;
 
 /**
  * SS12000 API Client
