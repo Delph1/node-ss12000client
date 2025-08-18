@@ -22,7 +22,7 @@ All dates are in the RFC 3339 format, we're not cavemen here.
     - [**Fetch Persons**](#fetch-persons)
     - [**Fetch ...**](#fetch-)
     - [**Webhooks for Subscriptions**](#webhooks-for-subscriptions)
-  - [**API referense**](#api-referense)
+  - [**API reference**](#api-reference)
   - [**Webhooks receiver (example)**](#webhooks-receiver-example)
   - [**Contribute**](#contribute)
   - [**License**](#license)
@@ -137,7 +137,7 @@ async function manageSubscriptions() {
 // manageSubscriptions(); 
 ```
 
-## **API referense**
+## **API reference**
 
 SS12000Client is designed to expose methods for all SS12000 API endpoints. Here is a list of the primary endpoints that are defined in the OpenAPI specification:
 
