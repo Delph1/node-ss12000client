@@ -276,18 +276,18 @@ class SS12000Client {
      * @param {string[]} [params.nameContains] 
      * @param {string} [params.civicNo] 
      * @param {string} [params.eduPersonPrincipalName]
-     * @param {string} [params.identifierValue] - references `externalIdentifiers.value`.
-     * @param {string} [params.identifierContext] - references `externalIdentifiers.context`.
-     * @param {string} [params.relationshipEntityType]
-     * @param {string} [params.relationshipOrganisation]
-     * @param {string} [params.relationshipStartDateOnOrBefore] - RFC 3339 format
-     * @param {string} [params.relationshipStartDateOnOrAfter] - RFC 3339 format
-     * @param {string} [params.relationshipEndDateOnOrBefore] - RFC 3339 format
-     * @param {string} [params.relationshipEndDateOnOrAfter] - RFC 3339 format
-     * @param {string} [params.metaCreatedBefore] - Endast poster skapade på eller före detta timestamp (RFC 3339 format).
-     * @param {string} [params.metaCreatedAfter] - Endast poster skapade efter detta timestamp (RFC 3339 format).
-     * @param {string} [params.metaModifiedBefore] - Endast poster modifierade på eller före detta timestamp (RFC 3339 format).
-     * @param {string} [params.metaModifiedAfter] - Endast poster modifierade efter detta timestamp (RFC 3339 format).
+     * @param {string} [params.identifier.value] - references `externalIdentifiers.value`.
+     * @param {string} [params.identifier.context] - references `externalIdentifiers.context`.
+     * @param {string} [params.relationship.entity.type]
+     * @param {string} [params.relationship.organisation]
+     * @param {string} [params.relationship.startDate.onOrBefore] - RFC 3339 format
+     * @param {string} [params.relationship.startDate.onOrAfter] - RFC 3339 format
+     * @param {string} [params.relationship.endDate.onOrBefore] - RFC 3339 format
+     * @param {string} [params.relationship.endDate.onOrAfter] - RFC 3339 format
+     * @param {string} [params.meta.created.before] - Endast poster skapade på eller före detta timestamp (RFC 3339 format).
+     * @param {string} [params.meta.created.after] - Endast poster skapade efter detta timestamp (RFC 3339 format).
+     * @param {string} [params.meta.modified.before] - Endast poster modifierade på eller före detta timestamp (RFC 3339 format).
+     * @param {string} [params.meta.modified.after] - Endast poster modifierade efter detta timestamp (RFC 3339 format).
      * @param {string[]} [params.expand] - Beskriver om expanderade data ska hämtas (t.ex. "duties", "responsibleFor").
      * @param {boolean} [params.expandReferenceNames] - Returnera `displayName` för alla refererade objekt.
      * @param {string} [params.sortkey] - Anger hur resultatet ska sorteras (t.ex. "DisplayNameAsc", "ModifiedDesc").
@@ -300,18 +300,18 @@ class SS12000Client {
             'nameContains': params.nameContains,
             'civicNo': params.civicNo,
             'eduPersonPrincipalName': params.eduPersonPrincipalName,
-            'identifier.value': params.identifierValue,
-            'identifier.context': params.identifierContext,
-            'relationship.entity.type': params.relationshipEntityType,
-            'relationship.organisation': params.relationshipOrganisation,
-            'relationship.startDate.onOrBefore': params.relationshipStartDateOnOrBefore,
-            'relationship.startDate.onOrAfter': params.relationshipStartDateOnOrAfter,
-            'relationship.endDate.onOrBefore': params.relationshipEndDateOnOrBefore,
-            'relationship.endDate.onOrAfter': params.relationshipEndDateOnOrAfter,
-            'meta.created.before': params.metaCreatedBefore,
-            'meta.created.after': params.metaCreatedAfter,
-            'meta.modified.before': params.metaModifiedBefore,
-            'meta.modified.after': params.metaModifiedAfter,
+            'identifier.value': params.identifier.value,
+            'identifier.context': params.identifier.context,
+            'relationship.entity.type': params.relationship.entity.type,
+            'relationship.organisation': params.relationship.organisation,
+            'relationship.startDate.onOrBefore': params.relationship.startDate.onOrBefore,
+            'relationship.startDate.onOrAfter': params.relationship.startDate.onOrAfter,
+            'relationship.endDate.onOrBefore': params.relationship.endDate.onOrBefore,
+            'relationship.endDate.onOrAfter': params.relationship.endDate.onOrAfter,
+            'meta.created.before': params.meta.created.before,
+            'meta.created.after': params.meta.created.after,
+            'meta.modified.before': params.meta.modified.before,
+            'meta.modified.after': params.meta.modified.after,
             'expand': params.expand,
             'expandReferenceNames': params.expandReferenceNames,
             'sortkey': params.sortkey,
@@ -378,19 +378,18 @@ class SS12000Client {
     /**
      * Get a list of placements.
      * @param {Object} [params={}] - Filter parameters.
-     * @param {string[]} [params.child] - List of child IDs.
-     * @param {string[]} [params.group] - List of group IDs.
-     * @param {string[]} [params.owner] - List of owner IDs.
-     * @param {string} [params.placedAt] - ID of the organisation where the placement is made.
-     * @param {string} [params.schoolType] - School type (e.g. "Gymnasieskola", "Grundskola").
-     * @param {string} [params.startDateOnOrBefore] - Only placements starting on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.startDateOnOrAfter] - Only placements starting after this timestamp (RFC 3339 format).
-     * @param {string} [params.endDateOnOrBefore] - Only placements ending on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.endDateOnOrAfter] - Only placements ending after this timestamp (RFC 3339 format).
-     * @param {string} [params.metaCreatedBefore] - Only placements created on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.metaCreatedAfter] - Only placements created after this timestamp (RFC 3339 format).
-     * @param {string} [params.metaModifiedBefore] - Only placements modified on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.metaModifiedAfter] - Only placements modified after this timestamp (RFC 3339 format).
+     * @param {string} [params.organisation] - Organisation ID.
+     * @param {string} [params.group] - Group ID.
+     * @param {string} [params.startDate.onOrBefore] - Only placements starting on or before this timestamp (RFC 3339 format).
+     * @param {string} [params.startDate.onOrAfter] - Only placements starting after this timestamp (RFC 3339 format).
+     * @param {string} [params.endDate.onOrBefore] - Only placements ending on or before this timestamp (RFC 3339 format).
+     * @param {string} [params.endDate.onOrAfter] - Only placements ending after this timestamp (RFC 3339 format).
+     * @param {string} [params.owner] - Limit to Owner ID.
+     * @param {string} [params.child] - Limit to Child ID.
+     * @param {string} [params.meta.created.before] - Only placements created on or before this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.created.after] - Only placements created after this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.modified.before] - Only placements modified on or before this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.modified.after] - Only placements modified after this timestamp (RFC 3339 format).
      * @param {boolean} [params.expandReferenceNames] - Return `displayName` for all referenced objects.
      * @param {string} [params.sortkey] - Sort order (e.g. "ModifiedDesc", "DisplayNameAsc").
      * @param {number} [params.limit] - Number of entities to show.
@@ -399,19 +398,18 @@ class SS12000Client {
      */
     async getPlacements(params = {}) {
         const mappedParams = {
-            'child': params.child,
+            'organisation': params.organisation,
             'group': params.group,
+            'startDate.onOrBefore': params.startDate.onOrBefore,
+            'startDate.onOrAfter': params.startDate.onOrAfter,
+            'endDate.onOrBefore': params.endDate.onOrBefore,
+            'endDate.onOrAfter': params.endDate.onOrAfter,
+            'child': params.child,
             'owner': params.owner,
-            'placedAt': params.placedAt,
-            'schoolType': params.schoolType,
-            'startDate.onOrBefore': params.startDateOnOrBefore,
-            'startDate.onOrAfter': params.startDateOnOrAfter,
-            'endDate.onOrBefore': params.endDateOnOrBefore,
-            'endDate.onOrAfter': params.endDateOnOrAfter,
-            'meta.created.before': params.metaCreatedBefore,
-            'meta.created.after': params.metaCreatedAfter,
-            'meta.modified.before': params.metaModifiedBefore,
-            'meta.modified.after': params.metaModifiedAfter,
+            'meta.created.before': params.meta.created.before,
+            'meta.created.after': params.meta.created.after,
+            'meta.modified.before': params.meta.modified.before,
+            'meta.modified.after': params.meta.modified.after,
             'expand': params.expand,
             'expandReferenceNames': params.expandReferenceNames,
             'sortkey': params.sortkey,
@@ -477,18 +475,17 @@ class SS12000Client {
     /**
      * Get a list of duties.
      * @param {Object} [params={}] - Filter parameters.
-     * @param {string[]} [params.person] - List of person IDs.
-     * @param {string[]} [params.dutyAt] - List of organisation IDs where the duty is performed.
+     * @param {string} [params.person]
+     * @param {string} [params.organisation]
      * @param {string[]} [params.dutyRole] - List of duty roles (e.g. "Teacher", "Principal").
-     * @param {string} [params.signature] - Signature of the duty.
-     * @param {string} [params.startDateOnOrBefore] - Only duties starting on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.startDateOnOrAfter] - Only duties starting after this timestamp (RFC 3339 format).
-     * @param {string} [params.endDateOnOrBefore] - Only duties ending on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.endDateOnOrAfter] - Only duties ending after this timestamp (RFC 3339 format).
-     * @param {string} [params.metaCreatedBefore] - Only duties created on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.metaCreatedAfter] - Only duties created after this timestamp (RFC 3339 format).
-     * @param {string} [params.metaModifiedBefore] - Only duties modified on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.metaModifiedAfter] - Only duties modified after this timestamp (RFC 3339 format).
+     * @param {string} [params.startDate.onOrBefore] - Only duties starting on or before this timestamp (RFC 3339 format).
+     * @param {string} [params.startDate.onOrAfter] - Only duties starting after this timestamp (RFC 3339 format).
+     * @param {string} [params.endDate.onOrBefore] - Only duties ending on or before this timestamp (RFC 3339 format).
+     * @param {string} [params.endDate.onOrAfter] - Only duties ending after this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.created.before] - Only duties created on or before this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.created.after] - Only duties created after this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.modified.before] - Only duties modified on or before this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.modified.after] - Only duties modified after this timestamp (RFC 3339 format).
      * @param {string[]} [params.expand] - Describes if expanded data should be fetched (e.g. "person", "dutyAt").
      * @param {boolean} [params.expandReferenceNames] - Return `displayName` for all referenced objects.
      * @param {string} [params.sortkey] - Sort order (e.g. "ModifiedDesc", "DisplayNameAsc").
@@ -499,17 +496,16 @@ class SS12000Client {
     async getDuties(params = {}) {
         const mappedParams = {
             'person': params.person,
-            'dutyAt': params.dutyAt,
+            'organisation': params.organisation,
             'dutyRole': params.dutyRole,
-            'signature': params.signature,
-            'startDate.onOrBefore': params.startDateOnOrBefore,
-            'startDate.onOrAfter': params.startDateOnOrAfter,
-            'endDate.onOrBefore': params.endDateOnOrBefore,
-            'endDate.onOrAfter': params.endDateOnOrAfter,
-            'meta.created.before': params.metaCreatedBefore,
-            'meta.created.after': params.metaCreatedAfter,
-            'meta.modified.before': params.metaModifiedBefore,
-            'meta.modified.after': params.metaModifiedAfter,
+            'startDate.onOrBefore': params.startDate.onOrBefore,
+            'startDate.onOrAfter': params.startDate.onOrAfter,
+            'endDate.onOrBefore': params.endDate.onOrBefore,
+            'endDate.onOrAfter': params.endDate.onOrAfter,
+            'meta.created.before': params.meta.created.before,
+            'meta.created.after': params.meta.created.after,
+            'meta.modified.before': params.meta.modified.before,
+            'meta.modified.after': params.meta.modified.after,
             'expand': params.expand,
             'expandReferenceNames': params.expandReferenceNames,
             'sortkey': params.sortkey,
@@ -576,16 +572,16 @@ class SS12000Client {
      * Get a list of groups.
      * @param {Object} [params={}] - Filter parameters.
      * @param {string[]} [params.groupType] - List of group types (e.g. "Class", "Course").
-     * @param {string[]} [params.schoolType] - List of school types (e.g. "Gymnasieskola", "Grundskola").
+     * @param {string[]} [params.schoolTypes] - List of school types (e.g. "Gymnasieskola", "Grundskola").
      * @param {string[]} [params.organisation] - List of organisation IDs.
-     * @param {string} [params.startDateOnOrBefore] - Only groups starting on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.startDateOnOrAfter] - Only groups starting after this timestamp (RFC 3339 format).
-     * @param {string} [params.endDateOnOrBefore] - Only groups ending on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.endDateOnOrAfter] - Only groups ending after this timestamp (RFC 3339 format).
-     * @param {string} [params.metaCreatedBefore] - Only groups created on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.metaCreatedAfter] - Only groups created after this timestamp (RFC 3339 format).
-     * @param {string} [params.metaModifiedBefore] - Only groups modified on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.metaModifiedAfter] - Only groups modified after this timestamp (RFC 3339 format).
+     * @param {string} [params.startDate.onOrBefore] - Only groups starting on or before this timestamp (RFC 3339 format).
+     * @param {string} [params.startDate.onOrAfter] - Only groups starting after this timestamp (RFC 3339 format).
+     * @param {string} [params.endDate.onOrBefore] - Only groups ending on or before this timestamp (RFC 3339 format).
+     * @param {string} [params.endDate.onOrAfter] - Only groups ending after this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.created.before] - Only groups created on or before this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.created.after] - Only groups created after this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.modified.before] - Only groups modified on or before this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.modified.after] - Only groups modified after this timestamp (RFC 3339 format).
      * @param {string[]} [params.expand] - Describes if expanded data should be fetched (e.g. "members", "teachers").
      * @param {boolean} [params.expandReferenceNames] - Return `displayName` for all referenced objects.
      * @param {string} [params.sortkey] - Sort order (e.g. "ModifiedDesc", "DisplayNameAsc").
@@ -596,16 +592,16 @@ class SS12000Client {
     async getGroups(params = {}) {
         const mappedParams = {
             'groupType': params.groupType,
-            'schoolType': params.schoolType,
+            'schoolTypes': params.schoolTypes,
             'organisation': params.organisation,
-            'startDate.onOrBefore': params.startDateOnOrBefore,
-            'startDate.onOrAfter': params.startDateOnOrAfter,
-            'endDate.onOrBefore': params.endDateOnOrBefore,
-            'endDate.onOrAfter': params.endDateOnOrAfter,
-            'meta.created.before': params.metaCreatedBefore,
-            'meta.created.after': params.metaCreatedAfter,
-            'meta.modified.before': params.metaModifiedBefore,
-            'meta.modified.after': params.metaModifiedAfter,
+            'startDate.onOrBefore': params.startDate.onOrBefore,
+            'startDate.onOrAfter': params.startDate.onOrAfter,
+            'endDate.onOrBefore': params.endDate.onOrBefore,
+            'endDate.onOrAfter': params.endDate.onOrAfter,
+            'meta.created.before': params.meta.created.before,
+            'meta.created.after': params.meta.created.after,
+            'meta.modified.before': params.meta.modified.before,
+            'meta.modified.after': params.meta.modified.after,
             'expand': params.expand,
             'expandReferenceNames': params.expandReferenceNames,
             'sortkey': params.sortkey,
@@ -671,15 +667,13 @@ class SS12000Client {
     /**
      * Get a list of programmes.
      * @param {Object} [params={}] - Filter parameters.
-     * @param {string} [params.nameContains] - Filter by programme name.
-     * @param {string} [params.type] - Programme type (e.g. "Gymnasieprogram", "Grundskoleprogram").
      * @param {string} [params.parentProgramme] - ID of the parent programme.
      * @param {string} [params.schoolType] - School type (e.g. "Gymnasieskola", "Grundskola").
      * @param {string} [params.code] - Programme code.
-     * @param {string} [params.metaCreatedBefore] - Only programmes created on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.metaCreatedAfter] - Only programmes created after this timestamp (RFC 3339 format).
-     * @param {string} [params.metaModifiedBefore] - Only programmes modified on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.metaModifiedAfter] - Only programmes modified after this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.created.before] - Only programmes created on or before this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.created.after] - Only programmes created after this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.modified.before] - Only programmes modified on or before this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.modified.after] - Only programmes modified after this timestamp (RFC 3339 format).
      * @param {string[]} [params.expand] - Describes if expanded data should be fetched (e.g. "parentProgramme", "schoolType").
      * @param {boolean} [params.expandReferenceNames] - Return `displayName` for all referenced objects.
      * @param {string} [params.sortkey] - Sort order (e.g. "ModifiedDesc", "DisplayNameAsc").
@@ -689,15 +683,13 @@ class SS12000Client {
      */
     async getProgrammes(params = {}) {
         const mappedParams = {
-            'nameContains': params.nameContains,
-            'type': params.type,
             'parentProgramme': params.parentProgramme,
             'schoolType': params.schoolType,
             'code': params.code,
-            'meta.created.before': params.metaCreatedBefore,
-            'meta.created.after': params.metaCreatedAfter,
-            'meta.modified.before': params.metaModifiedBefore,
-            'meta.modified.after': params.metaModifiedAfter,
+            'meta.created.before': params.meta.created.before,
+            'meta.created.after': params.meta.created.after,
+            'meta.modified.before': params.meta.modified.before,
+            'meta.modified.after': params.meta.modified.after,
             'expand': params.expand,
             'expandReferenceNames': params.expandReferenceNames,
             'sortkey': params.sortkey,
@@ -711,12 +703,11 @@ class SS12000Client {
      * Get multiple programmes based on a list of IDs.
      * @param {Object} body - Request body.
      * @param {string[]} [body.ids] - List of programme IDs.
-     * @param {string[]} [expand] - Describes if expanded data should be fetched.
      * @param {boolean} [expandReferenceNames] - Return `displayName` for all referenced objects.
      * @returns {Promise<Object>} - A list of programmes.
      */
-    async lookupProgrammes(body, expand = [], expandReferenceNames = false) {
-        const params = { expand, expandReferenceNames };
+    async lookupProgrammes(body, expandReferenceNames = false) {
+        const params = { expandReferenceNames };
         const url = new URL(`${this.baseUrl}/programmes/lookup`);
         Object.keys(params).forEach(key => {
             if (params[key] !== undefined && params[key] !== null) {
@@ -764,14 +755,14 @@ class SS12000Client {
      * Get a list of study plans.
      * @param {Object} [params={}] - Filter parameters.
      * @param {string} [params.student] - ID of the student.
-     * @param {string} [params.startDateOnOrBefore] - Only study plans starting on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.startDateOnOrAfter] - Only study plans starting after this timestamp (RFC 3339 format).
-     * @param {string} [params.endDateOnOrBefore] - Only study plans ending on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.endDateOnOrAfter] - Only study plans ending after this timestamp (RFC 3339 format).
-     * @param {string} [params.metaCreatedBefore] - Only study plans created on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.metaCreatedAfter] - Only study plans created after this timestamp (RFC 3339 format).
-     * @param {string} [params.metaModifiedBefore] - Only study plans modified on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.metaModifiedAfter] - Only study plans modified after this timestamp (RFC 3339 format).
+     * @param {string} [params.startDate.onOrBefore] - Only study plans starting on or before this timestamp (RFC 3339 format).
+     * @param {string} [params.startDate.onOrAfter] - Only study plans starting after this timestamp (RFC 3339 format).
+     * @param {string} [params.endDate.onOrBefore] - Only study plans ending on or before this timestamp (RFC 3339 format).
+     * @param {string} [params.endDate.onOrAfter] - Only study plans ending after this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.created.before] - Only study plans created on or before this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.created.after] - Only study plans created after this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.modified.before] - Only study plans modified on or before this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.modified.after] - Only study plans modified after this timestamp (RFC 3339 format).
      * @param {string[]} [params.expand] - Describes if expanded data should be fetched (e.g. "student", "courses").
      * @param {boolean} [params.expandReferenceNames] - Return `displayName` for all referenced objects.
      * @param {string} [params.sortkey] - Sort order (e.g. "ModifiedDesc", "DisplayNameAsc").
@@ -782,14 +773,14 @@ class SS12000Client {
     async getStudyPlans(params = {}) {
         const mappedParams = {
             'student': params.student,
-            'startDate.onOrBefore': params.startDateOnOrBefore,
-            'startDate.onOrAfter': params.startDateOnOrAfter,
-            'endDate.onOrBefore': params.endDateOnOrBefore,
-            'endDate.onOrAfter': params.endDateOnOrAfter,
-            'meta.created.before': params.metaCreatedBefore,
-            'meta.created.after': params.metaCreatedAfter,
-            'meta.modified.before': params.metaModifiedBefore,
-            'meta.modified.after': params.metaModifiedAfter,
+            'startDate.onOrBefore': params.startDate.onOrBefore,
+            'startDate.onOrAfter': params.startDate.onOrAfter,
+            'endDate.onOrBefore': params.endDate.onOrBefore,
+            'endDate.onOrAfter': params.endDate.onOrAfter,
+            'meta.created.before': params.meta.created.before,
+            'meta.created.after': params.meta.created.after,
+            'meta.modified.before': params.meta.modified.before,
+            'meta.modified.after': params.meta.modified.after,
             'expand': params.expand,
             'expandReferenceNames': params.expandReferenceNames,
             'sortkey': params.sortkey,
@@ -799,6 +790,8 @@ class SS12000Client {
         return this._get('/studyplans', mappedParams);
     }
 
+    // --- Study Plans Lookup Endpoints are not implemented in the standard and thus the code is commented out ---
+
     /**
      * Get multiple study plans based on a list of IDs.
      * @param {Object} body - Request body.
@@ -806,7 +799,6 @@ class SS12000Client {
      * @param {string[]} [expand] - Describes if expanded data should be fetched.
      * @param {boolean} [expandReferenceNames] - Return `displayName` for all referenced objects.
      * @returns {Promise<Object>} - A list of study plans.
-     */
     async lookupStudyPlans(body, expand = [], expandReferenceNames = false) {
         const params = { expand, expandReferenceNames };
         const url = new URL(`${this.baseUrl}/studyplans/lookup`);
@@ -836,7 +828,9 @@ class SS12000Client {
             console.error(`Error during POST call to ${url.toString()}:`, error);
             throw error;
         }
-    }
+    }    
+    */
+
 
     /**
      * Get a study plan by ID.
@@ -855,25 +849,10 @@ class SS12000Client {
     /**
      * Get a list of syllabuses.
      * @param {Object} [params={}] - Filter parameters.
-     * @param {string} [params.schoolType] - School type (e.g. "Gymnasieskola", "Grundskola").
-     * @param {string} [params.subjectCode] - Subject code.
-     * @param {string} [params.subjectNameContains] - Filter by subject name.
-     * @param {string} [params.subjectDesignation] - Subject designation (e.g. "Mathematics", "History").
-     * @param {string} [params.courseCode] - Course code.
-     * @param {string} [params.courseNameContains] - Filter by course name.
-     * @param {string} [params.startSchoolYearOnOrBefore] - Only syllabuses starting on or before this school year (RFC 3339 format).
-     * @param {string} [params.startSchoolYearOnOrAfter] - Only syllabuses starting after this school year (RFC 3339 format).
-     * @param {string} [params.endSchoolYearOnOrBefore] - Only syllabuses ending on or before this school year (RFC 3339 format).
-     * @param {string} [params.endSchoolYearOnOrAfter] - Only syllabuses ending after this school year (RFC 3339 format).
-     * @param {string} [params.pointsOnOrBefore] - Only syllabuses with points on or before this value.
-     * @param {string} [params.pointsOnOrAfter] - Only syllabuses with points on or after this value.
-     * @param {string} [params.curriculum] - Curriculum (e.g. "Lgr11", "Gy11").
-     * @param {string} [params.languageCode] - Language code (e.g. "sv", "en").
-     * @param {boolean} [params.official] - Only official syllabuses.
-     * @param {string} [params.metaCreatedBefore] - Only syllabuses created on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.metaCreatedAfter] - Only syllabuses created after this timestamp (RFC 3339 format).
-     * @param {string} [params.metaModifiedBefore] - Only syllabuses modified on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.metaModifiedAfter] - Only syllabuses modified after this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.created.before] - Only syllabuses created on or before this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.created.after] - Only syllabuses created after this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.modified.before] - Only syllabuses modified on or before this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.modified.after] - Only syllabuses modified after this timestamp (RFC 3339 format).
      * @param {boolean} [params.expandReferenceNames] - Return `displayName` for all referenced objects.
      * @param {string} [params.sortkey] - Sort order (e.g. "ModifiedDesc", "DisplayNameAsc").
      * @param {number} [params.limit] - Number of entities to show. 
@@ -882,25 +861,10 @@ class SS12000Client {
      */
     async getSyllabuses(params = {}) {
         const mappedParams = {
-            'schoolType': params.schoolType,
-            'subjectCode': params.subjectCode,
-            'subjectNameContains': params.subjectNameContains,
-            'subjectDesignation': params.subjectDesignation,
-            'courseCode': params.courseCode,
-            'courseNameContains': params.courseNameContains,
-            'startSchoolYear.onOrBefore': params.startSchoolYearOnOrBefore,
-            'startSchoolYear.onOrAfter': params.startSchoolYearOnOrAfter,
-            'endSchoolYear.onOrBefore': params.endSchoolYearOnOrBefore,
-            'endSchoolYear.onOrAfter': params.endSchoolYearOnOrAfter,
-            'points.onOrBefore': params.pointsOnOrBefore,
-            'points.onOrAfter': params.pointsOnOrAfter,
-            'curriculum': params.curriculum,
-            'languageCode': params.languageCode,
-            'official': params.official,
-            'meta.created.before': params.metaCreatedBefore,
-            'meta.created.after': params.metaCreatedAfter,
-            'meta.modified.before': params.metaModifiedBefore,
-            'meta.modified.after': params.metaModifiedAfter,
+            'meta.created.before': params.meta.created.before,
+            'meta.created.after': params.meta.created.after,
+            'meta.modified.before': params.meta.modified.before,
+            'meta.modified.after': params.meta.modified.after,
             'expandReferenceNames': params.expandReferenceNames,
             'sortkey': params.sortkey,
             'limit': params.limit,
@@ -959,18 +923,11 @@ class SS12000Client {
     /**
      * Get a list of school unit offerings.
      * @param {Object} [params={}] - Filter parameters.
-     * @param {string} [params.offeredAt] - ID of the organisation where the school unit is offered.
-     * @param {string[]} [params.offeredSyllabuses] - List of syllabus IDs that the school unit is offering.
-     * @param {string[]} [params.offeredProgrammes] - List of programme IDs that the school unit is offering.
-     * @param {string} [params.startDateOnOrBefore] - Only offerings starting on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.startDateOnOrAfter] - Only offerings starting after this timestamp (RFC 3339 format).
-     * @param {string} [params.endDateOnOrBefore] - Only offerings ending on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.endDateOnOrAfter] - Only offerings ending after this timestamp (RFC 3339 format).
-     * @param {string} [params.metaCreatedBefore] - Only offerings created on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.metaCreatedAfter] - Only offerings created after this timestamp (RFC 3339 format).
-     * @param {string} [params.metaModifiedBefore] - Only offerings modified on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.metaModifiedAfter] - Only offerings modified after this timestamp (RFC 3339 format).
-     * @param {string[]} [params.expand] - Describes if expanded data should be fetched (e.g. "offeredAt", "offeredSyllabuses", "offeredProgrammes").
+     * @param {string} [params.organisation] - ID of the organisation where the school unit is offered.
+     * @param {string} [params.meta.created.before] - Only offerings created on or before this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.created.after] - Only offerings created after this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.modified.before] - Only offerings modified on or before this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.modified.after] - Only offerings modified after this timestamp (RFC 3339 format).
      * @param {boolean} [params.expandReferenceNames] - Return `displayName` for all referenced objects.
      * @param {string} [params.sortkey] - Sort order (e.g. "ModifiedDesc", "DisplayNameAsc").
      * @param {number} [params.limit] - Number of entities to show. 
@@ -979,18 +936,11 @@ class SS12000Client {
      */
     async getSchoolUnitOfferings(params = {}) {
         const mappedParams = {
-            'offeredAt': params.offeredAt,
-            'offeredSyllabuses': params.offeredSyllabuses,
-            'offeredProgrammes': params.offeredProgrammes,
-            'startDate.onOrBefore': params.startDateOnOrBefore,
-            'startDate.onOrAfter': params.startDateOnOrAfter,
-            'endDate.onOrBefore': params.endDateOnOrBefore,
-            'endDate.onOrAfter': params.endDateOnOrAfter,
-            'meta.created.before': params.metaCreatedBefore,
-            'meta.created.after': params.metaCreatedAfter,
-            'meta.modified.before': params.metaModifiedBefore,
-            'meta.modified.after': params.metaModifiedAfter,
-            'expand': params.expand,
+            'organisation': params.organisation,
+            'meta.created.before': params.meta.created.before,
+            'meta.created.after': params.meta.created.after,
+            'meta.modified.before': params.meta.modified.before,
+            'meta.modified.after': params.meta.modified.after,
             'expandReferenceNames': params.expandReferenceNames,
             'sortkey': params.sortkey,
             'limit': params.limit,
@@ -1003,12 +953,11 @@ class SS12000Client {
      * Get multiple school unit offerings based on a list of IDs.
      * @param {Object} body - Request body.
      * @param {string[]} [body.ids] - List of school unit offering IDs.
-     * @param {string[]} [expand] - Describes if expanded data should be fetched.
      * @param {boolean} [expandReferenceNames] - Return `displayName` for all referenced objects.
      * @returns {Promise<Object>} - A list of school unit offerings.
      */
-    async lookupSchoolUnitOfferings(body, expand = [], expandReferenceNames = false) {
-        const params = { expand, expandReferenceNames };
+    async lookupSchoolUnitOfferings(body, expandReferenceNames = false) {
+        const params = { expandReferenceNames };
         const url = new URL(`${this.baseUrl}/schoolUnitOfferings/lookup`);
         Object.keys(params).forEach(key => {
             if (params[key] !== undefined && params[key] !== null) {
@@ -1056,17 +1005,17 @@ class SS12000Client {
      * Get a list of activities.
      * @param {Object} [params={}] - Filter parameters.
      * @param {string} [params.organisation] - ID of the organisation.
-     * @param {string} [params.syllabus] - ID of the syllabus.
-     * @param {string} [params.activityType] - Type of the activity (e.g. "Lecture", "Exercise").
-     * @param {boolean} [params.calendarEventsRequired] - Only activities with calendar events required.
-     * @param {string} [params.startDateOnOrBefore] - Only activities starting on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.startDateOnOrAfter] - Only activities starting after this timestamp (RFC 3339 format).
-     * @param {string} [params.endDateOnOrBefore] - Only activities ending on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.endDateOnOrAfter] - Only activities ending after this timestamp (RFC 3339 format).
-     * @param {string} [params.metaCreatedBefore] - Only activities created on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.metaCreatedAfter] - Only activities created after this timestamp (RFC 3339 format).
-     * @param {string} [params.metaModifiedBefore] - Only activities modified on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.metaModifiedAfter] - Only activities modified after this timestamp (RFC 3339 format).
+     * @param {string} [params.member] - ID of the syllabus.
+     * @param {string} [params.teacher] - ID of the syllabus.
+     * @param {string} [params.group]
+     * @param {string} [params.startDate.onOrBefore] - Only activities starting on or before this timestamp (RFC 3339 format).
+     * @param {string} [params.startDate.onOrAfter] - Only activities starting after this timestamp (RFC 3339 format).
+     * @param {string} [params.endDate.onOrBefore] - Only activities ending on or before this timestamp (RFC 3339 format).
+     * @param {string} [params.endDate.onOrAfter] - Only activities ending after this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.created.before] - Only activities created on or before this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.created.after] - Only activities created after this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.modified.before] - Only activities modified on or before this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.modified.after] - Only activities modified after this timestamp (RFC 3339 format).
      * @param {string[]} [params.expand] - Describes if expanded data should be fetched (e.g. "syllabus", "organisation").
      * @param {boolean} [params.expandReferenceNames] - Return `displayName` for all referenced objects.
      * @param {string} [params.sortkey] - Sort order (e.g. "ModifiedDesc", "DisplayNameAsc").
@@ -1077,17 +1026,17 @@ class SS12000Client {
     async getActivities(params = {}) {
         const mappedParams = {
             'organisation': params.organisation,
-            'syllabus': params.syllabus,
-            'activityType': params.activityType,
-            'calendarEventsRequired': params.calendarEventsRequired,
-            'startDate.onOrBefore': params.startDateOnOrBefore,
-            'startDate.onOrAfter': params.startDateOnOrAfter,
-            'endDate.onOrBefore': params.endDateOnOrBefore,
-            'endDate.onOrAfter': params.endDateOnOrAfter,
-            'meta.created.before': params.metaCreatedBefore,
-            'meta.created.after': params.metaCreatedAfter,
-            'meta.modified.before': params.metaModifiedBefore,
-            'meta.modified.after': params.metaModifiedAfter,
+            'member': params.member,
+            'teacher': params.teacher,
+            'activityType': params.group,
+            'startDate.onOrBefore': params.startDate.onOrBefore,
+            'startDate.onOrAfter': params.startDate.onOrAfter,
+            'endDate.onOrBefore': params.endDate.onOrBefore,
+            'endDate.onOrAfter': params.endDate.onOrAfter,
+            'meta.created.before': params.meta.created.before,
+            'meta.created.after': params.meta.created.after,
+            'meta.modified.before': params.meta.modified.before,
+            'meta.modified.after': params.meta.modified.after,
             'expand': params.expand,
             'expandReferenceNames': params.expandReferenceNames,
             'sortkey': params.sortkey,
@@ -1153,18 +1102,19 @@ class SS12000Client {
     /**
      * Get a list of calendar events.
      * @param {Object} [params={}] - Filter parameters.
-     * @param {string} [params.activity] - ID of the activity.
-     * @param {string} [params.startTimeOnOrBefore] - Only events starting on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.startTimeOnOrAfter] - Only events starting after this timestamp (RFC 3339 format).
-     * @param {string} [params.endTimeOnOrBefore] - Only events ending on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.endTimeOnOrAfter] - Only events ending after this timestamp (RFC 3339 format).
-     * @param {boolean} [params.cancelled] - Only cancelled events.
-     * @param {string} [params.room] - ID of the room.
-     * @param {string} [params.resource] - ID of the resource.
-     * @param {string} [params.metaCreatedBefore] - Only events created on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.metaCreatedAfter] - Only events created after this timestamp (RFC 3339 format).
-     * @param {string} [params.metaModifiedBefore] - Only events modified on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.metaModifiedAfter] - Only events modified after this timestamp (RFC 3339 format).
+     * @param {string} [params.activity] 
+     * @param {string} [params.student] 
+     * @param {string} [params.teacher] 
+     * @param {string} [params.organisation] 
+     * @param {string} [params.group]
+     * @param {string} [params.startTime.onOrBefore] - Only events starting on or before this timestamp (RFC 3339 format).
+     * @param {string} [params.startTime.onOrAfter] - Only events starting after this timestamp (RFC 3339 format).
+     * @param {string} [params.endTime.onOrBefore] - Only events ending on or before this timestamp (RFC 3339 format).
+     * @param {string} [params.endTime.onOrAfter] - Only events ending after this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.created.before] - Only events created on or before this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.created.after] - Only events created after this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.modified.before] - Only events modified on or before this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.modified.after] - Only events modified after this timestamp (RFC 3339 format).
      * @param {string[]} [params.expand] - Describes if expanded data should be fetched (e.g. "activity", "room", "resource").
      * @param {boolean} [params.expandReferenceNames] - Return `displayName` for all referenced objects.
      * @param {string} [params.sortkey] - Sort order (e.g. "ModifiedDesc", "DisplayNameAsc").
@@ -1175,17 +1125,18 @@ class SS12000Client {
     async getCalendarEvents(params = {}) {
         const mappedParams = {
             'activity': params.activity,
-            'startTime.onOrBefore': params.startTimeOnOrBefore,
-            'startTime.onOrAfter': params.startTimeOnOrAfter,
-            'endTime.onOrBefore': params.endTimeOnOrBefore,
-            'endTime.onOrAfter': params.endTimeOnOrAfter,
-            'cancelled': params.cancelled,
-            'room': params.room,
-            'resource': params.resource,
-            'meta.created.before': params.metaCreatedBefore,
-            'meta.created.after': params.metaCreatedAfter,
-            'meta.modified.before': params.metaModifiedBefore,
-            'meta.modified.after': params.metaModifiedAfter,
+            'student': params.student,
+            'teacher': params.teacher,
+            'organisation': params.organisation,
+            'group': params.group,
+            'startTime.onOrBefore': params.startTime.onOrBefore,
+            'startTime.onOrAfter': params.startTime.onOrAfter,
+            'endTime.onOrBefore': params.endTime.onOrBefore,
+            'endTime.onOrAfter': params.endTime.onOrAfter,
+            'meta.created.before': params.meta.created.before,
+            'meta.created.after': params.meta.created.after,
+            'meta.modified.before': params.meta.modified.before,
+            'meta.modified.after': params.meta.modified.after,
             'expand': params.expand,
             'expandReferenceNames': params.expandReferenceNames,
             'sortkey': params.sortkey,
@@ -1199,12 +1150,11 @@ class SS12000Client {
      * Get multiple calendar events based on a list of IDs.
      * @param {Object} body - Request body.
      * @param {string[]} [body.ids] - List of calendar event IDs.
-     * @param {string[]} [expand] - Describes if expanded data should be fetched.
      * @param {boolean} [expandReferenceNames] - Return `displayName` for all referenced objects.
      * @returns {Promise<Object>} - A list of calendar events.
      */
-    async lookupCalendarEvents(body, expand = [], expandReferenceNames = false) {
-        const params = { expand, expandReferenceNames };
+    async lookupCalendarEvents(body, expandReferenceNames = false) {
+        const params = { expandReferenceNames };
         const url = new URL(`${this.baseUrl}/calendarEvents/lookup`);
         Object.keys(params).forEach(key => {
             if (params[key] !== undefined && params[key] !== null) {
@@ -1253,15 +1203,11 @@ class SS12000Client {
      * @param {Object} [params={}] - Filter parameters.
      * @param {string} [params.calendarEvent] - ID of the calendar event.
      * @param {string} [params.student] - ID of the student.
-     * @param {string} [params.reporter] - ID of the reporter.
-     * @param {boolean} [params.isReported] - Only reported attendances.
-     * @param {string} [params.reportedTimestampOnOrBefore] - Only attendances reported on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.reportedTimestampOnOrAfter] - Only attendances reported after this timestamp (RFC 3339 format).
-     * @param {string} [params.metaCreatedBefore] - Only attendances created on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.metaCreatedAfter] - Only attendances created after this timestamp (RFC 3339 format).
-     * @param {string} [params.metaModifiedBefore] - Only attendances modified on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.metaModifiedAfter] - Only attendances modified after this timestamp (RFC 3339 format).
-     * @param {string[]} [params.expand] - Describes if expanded data should be fetched (e.g. "calendarEvent", "student", "reporter").
+     * @param {string} [params.organisation]
+     * @param {string} [params.meta.created.before] - Only attendances created on or before this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.created.after] - Only attendances created after this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.modified.before] - Only attendances modified on or before this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.modified.after] - Only attendances modified after this timestamp (RFC 3339 format).
      * @param {boolean} [params.expandReferenceNames] - Return `displayName` for all referenced objects.
      * @param {string} [params.sortkey] - Sort order (e.g. "ModifiedDesc", "DisplayNameAsc").
      * @param {number} [params.limit] - Number of entities to show.
@@ -1272,15 +1218,11 @@ class SS12000Client {
         const mappedParams = {
             'calendarEvent': params.calendarEvent,
             'student': params.student,
-            'reporter': params.reporter,
-            'isReported': params.isReported,
-            'reportedTimestamp.onOrBefore': params.reportedTimestampOnOrBefore,
-            'reportedTimestamp.onOrAfter': params.reportedTimestampOnOrAfter,
-            'meta.created.before': params.metaCreatedBefore,
-            'meta.created.after': params.metaCreatedAfter,
-            'meta.modified.before': params.metaModifiedBefore,
-            'meta.modified.after': params.metaModifiedAfter,
-            'expand': params.expand,
+            'organisation': params.organisation,
+            'meta.created.before': params.meta.created.before,
+            'meta.created.after': params.meta.created.after,
+            'meta.modified.before': params.meta.modified.before,
+            'meta.modified.after': params.meta.modified.after,
             'expandReferenceNames': params.expandReferenceNames,
             'sortkey': params.sortkey,
             'limit': params.limit,
@@ -1293,12 +1235,11 @@ class SS12000Client {
      * Get multiple attendances based on a list of IDs.
      * @param {Object} body - Request body.
      * @param {string[]} [body.ids] - List of attendance IDs.
-     * @param {string[]} [expand] - Describes if expanded data should be fetched.
      * @param {boolean} [expandReferenceNames] - Return `displayName` for all referenced objects.
      * @returns {Promise<Object>} - A list of attendances.
      */
-    async lookupAttendances(body, expand = [], expandReferenceNames = false) {
-        const params = { expand, expandReferenceNames };
+    async lookupAttendances(body, expandReferenceNames = false) {
+        const params = { expandReferenceNames };
         const url = new URL(`${this.baseUrl}/attendances/lookup`);
         Object.keys(params).forEach(key => {
             if (params[key] !== undefined && params[key] !== null) {
@@ -1355,16 +1296,11 @@ class SS12000Client {
      * Get a list of attendance events.
      * @param {Object} [params={}] - Filter parameters.
      * @param {string} [params.person] - ID of the person.
-     * @param {string} [params.registeredBy] - ID of the person who registered the attendance event.
-     * @param {string} [params.group] - ID of the group.
-     * @param {string} [params.room] - ID of the room.
-     * @param {string} [params.timeOnOrBefore] - Only events on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.timeOnOrAfter] - Only events on or after this timestamp (RFC 3339 format).
-     * @param {string} [params.eventType] - Type of the event (e.g. "Arrival", "Departure").
-     * @param {string} [params.metaCreatedBefore] - Only events created on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.metaCreatedAfter] - Only events created after this timestamp (RFC 3339 format).
-     * @param {string} [params.metaModifiedBefore] - Only events modified on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.metaModifiedAfter] - Only events modified after this timestamp (RFC 3339 format).
+     * @param {string[]} [params.group] - ID of the group.
+     * @param {string} [params.meta.created.before] - Only events created on or before this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.created.after] - Only events created after this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.modified.before] - Only events modified on or before this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.modified.after] - Only events modified after this timestamp (RFC 3339 format).
      * @param {string[]} [params.expand] - Describes if expanded data should be fetched (e.g. "person", "registeredBy", "group", "room").
      * @param {boolean} [params.expandReferenceNames] - Return `displayName` for all referenced objects.
      * @param {string} [params.sortkey] - Sort order (e.g. "ModifiedDesc", "DisplayNameAsc").
@@ -1375,16 +1311,11 @@ class SS12000Client {
     async getAttendanceEvents(params = {}) {
         const mappedParams = {
             'person': params.person,
-            'registeredBy': params.registeredBy,
             'group': params.group,
-            'room': params.room,
-            'time.onOrBefore': params.timeOnOrBefore,
-            'time.onOrAfter': params.timeOnOrAfter,
-            'eventType': params.eventType,
-            'meta.created.before': params.metaCreatedBefore,
-            'meta.created.after': params.metaCreatedAfter,
-            'meta.modified.before': params.metaModifiedBefore,
-            'meta.modified.after': params.metaModifiedAfter,
+            'meta.created.before': params.meta.created.before,
+            'meta.created.after': params.meta.created.after,
+            'meta.modified.before': params.meta.modified.before,
+            'meta.modified.after': params.meta.modified.after,
             'expand': params.expand,
             'expandReferenceNames': params.expandReferenceNames,
             'sortkey': params.sortkey,
@@ -1445,27 +1376,31 @@ class SS12000Client {
         return this._get(`/attendanceEvents/${id}`, params);
     }
 
+    
+    /**
+     * Delete an attendance event by ID.
+     * @param {string} id - ID of the attendance to delete.
+     * @returns {Promise<void>}
+     */
+    async deleteAttendanceEventById(id) {
+        return this._delete(`/attendanceEvents/${id}`);
+    }
+
     // --- AttendanceSchedules Endpoints ---
 
     /**
      * Get a list of attendance schedules.
      * @param {Object} [params={}] - Filter parameters.
      * @param {string} [params.placement] - ID of the placement.
-     * @param {number} [params.numberOfWeeksOnOrBefore] - Only schedules with number of weeks on or before this value.
-     * @param {number} [params.numberOfWeeksOnOrAfter] - Only schedules with number of weeks on or after this value.
-     * @param {string} [params.startDateOnOrBefore] - Only schedules starting on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.startDateOnOrAfter] - Only schedules starting after this timestamp (RFC 3339 format).
-     * @param {string} [params.endDateOnOrBefore] - Only schedules ending on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.endDateOnOrAfter] - Only schedules ending after this timestamp (RFC 3339 format).
-     * @param {boolean} [params.temporary] - Only temporary schedules.
-     * @param {string} [params.state] - State of the schedule (e.g. "Active", "Inactive").
-     * @param {string} [params.metaCreatedBefore] - Only schedules created on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.metaCreatedAfter] - Only schedules created after this timestamp (RFC 3339 format).
-     * @param {string} [params.metaModifiedBefore] - Only schedules modified on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.metaModifiedAfter] - Only schedules modified after this timestamp (RFC 3339 format).
-     * @param {string[]} [params.expand] - Describes if expanded data should be fetched (e.g. "placement").
+     * @param {string} [params.startDate.onOrBefore] - Only schedules starting on or before this timestamp (RFC 3339 format).
+     * @param {string} [params.startDate.onOrAfter] - Only schedules starting after this timestamp (RFC 3339 format).
+     * @param {string} [params.endDate.onOrBefore] - Only schedules ending on or before this timestamp (RFC 3339 format).
+     * @param {string} [params.endDate.onOrAfter] - Only schedules ending after this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.created.before] - Only schedules created on or before this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.created.after] - Only schedules created after this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.modified.before] - Only schedules modified on or before this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.modified.after] - Only schedules modified after this timestamp (RFC 3339 format).
      * @param {boolean} [params.expandReferenceNames] - Return `displayName` for all referenced objects.
-     * @param {string} [params.sortkey] - Sort order (e.g. "ModifiedDesc", "DisplayNameAsc").
      * @param {number} [params.limit] - Number of entities to show.
      * @param {string} [params.pageToken] - An opaque value that the server has returned to a previous query.
      * @returns {Promise<Object>} - A list of attendance schedules.
@@ -1473,21 +1408,15 @@ class SS12000Client {
     async getAttendanceSchedules(params = {}) {
         const mappedParams = {
             'placement': params.placement,
-            'numberOfWeeks.onOrBefore': params.numberOfWeeksOnOrBefore,
-            'numberOfWeeks.onOrAfter': params.numberOfWeeksOnOrAfter,
-            'startDate.onOrBefore': params.startDateOnOrBefore,
-            'startDate.onOrAfter': params.startDateOnOrAfter,
-            'endDate.onOrBefore': params.endDateOnOrBefore,
-            'endDate.onOrAfter': params.endDateOnOrAfter,
-            'temporary': params.temporary,
-            'state': params.state,
-            'meta.created.before': params.metaCreatedBefore,
-            'meta.created.after': params.metaCreatedAfter,
-            'meta.modified.before': params.metaModifiedBefore,
-            'meta.modified.after': params.metaModifiedAfter,
-            'expand': params.expand,
+            'startDate.onOrBefore': params.startDate.onOrBefore,
+            'startDate.onOrAfter': params.startDate.onOrAfter,
+            'endDate.onOrBefore': params.endDate.onOrBefore,
+            'endDate.onOrAfter': params.endDate.onOrAfter,
+            'meta.created.before': params.meta.created.before,
+            'meta.created.after': params.meta.created.after,
+            'meta.modified.before': params.meta.modified.before,
+            'meta.modified.after': params.meta.modified.after,
             'expandReferenceNames': params.expandReferenceNames,
-            'sortkey': params.sortkey,
             'limit': params.limit,
             'pageToken': params.pageToken,
         };
@@ -1498,12 +1427,11 @@ class SS12000Client {
      * Get multiple attendance schedules based on a list of IDs.
      * @param {Object} body - Request body.
      * @param {string[]} [body.ids] - List of attendance schedule IDs.
-     * @param {string[]} [expand] - Describes if expanded data should be fetched.
      * @param {boolean} [expandReferenceNames] - Return `displayName` for all referenced objects.
      * @returns {Promise<Object>} - A list of attendance schedules.
      */
-    async lookupAttendanceSchedules(body, expand = [], expandReferenceNames = false) {
-        const params = { expand, expandReferenceNames };
+    async lookupAttendanceSchedules(body, expandReferenceNames = false) {
+        const params = { expandReferenceNames };
         const url = new URL(`${this.baseUrl}/attendanceSchedules/lookup`);
         Object.keys(params).forEach(key => {
             if (params[key] !== undefined && params[key] !== null) {
@@ -1545,32 +1473,30 @@ class SS12000Client {
         return this._get(`/attendanceSchedules/${id}`, params);
     }
 
+    /**
+     * Delete an attendance schedule by ID.
+     * @param {string} id - ID of the attendance to delete.
+     * @returns {Promise<void>}
+     */
+    async deleteAttendanceEventById(id) {
+        return this._delete(`/attendanceSchedules/${id}`);
+    }
+
     // --- Grades Endpoints ---
 
     /**
      * Get a list of grades.
      * @param {Object} [params={}] - Filter parameters.
      * @param {string} [params.student] - ID of the student.
-     * @param {string} [params.schoolUnit] - ID of the school unit.
      * @param {string} [params.registeredBy] - ID of the person who registered the grade.
      * @param {string} [params.gradingTeacher] - ID of the teacher who graded the student.
-     * @param {string} [params.group] - ID of the group.
-     * @param {string} [params.registeredDateOnOrBefore] - Only grades registered on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.registeredDateOnOrAfter] - Only grades registered after this timestamp (RFC 3339 format).
-     * @param {string} [params.gradeValue] - Value of the grade (e.g. "A", "B", "C").
-     * @param {boolean} [params.finalGrade] - Only final grades.
-     * @param {boolean} [params.trial] - Only trial grades.
-     * @param {boolean} [params.adaptedStudyPlan] - Only grades from adapted study plans.
-     * @param {string} [params.correctionType] - Type of correction (e.g. "Normal", "Reassessment").
-     * @param {boolean} [params.converted] - Only converted grades.
-     * @param {string} [params.semester] - Semester of the grade (e.g. "1", "2").
-     * @param {string} [params.yearOnOrBefore] - Only grades from years on or before this value.
-     * @param {string} [params.yearOnOrAfter] - Only grades from years on or after this value.
-     * @param {string} [params.syllabus] - ID of the syllabus.
-     * @param {string} [params.metaCreatedBefore] - Only grades created on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.metaCreatedAfter] - Only grades created after this timestamp (RFC 3339 format).
-     * @param {string} [params.metaModifiedBefore] - Only grades modified on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.metaModifiedAfter] - Only grades modified after this timestamp (RFC 3339 format).
+     * @param {string} [params.orginsation] - ID of the group.
+     * @param {string} [params.registeredDate.onOrBefore] - Only grades registered on or before this timestamp (RFC 3339 format).
+     * @param {string} [params.registeredDate.onOrAfter] - Only grades registered after this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.created.before] - Only grades created on or before this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.created.after] - Only grades created after this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.modified.before] - Only grades modified on or before this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.modified.after] - Only grades modified after this timestamp (RFC 3339 format).
      * @param {string[]} [params.expand] - Describes if expanded data should be fetched (e.g. "student", "schoolUnit", "gradingTeacher").
      * @param {boolean} [params.expandReferenceNames] - Return `displayName` for all referenced objects.
      * @param {string} [params.sortkey] - Sort order (e.g. "ModifiedDesc", "DisplayNameAsc").
@@ -1581,26 +1507,15 @@ class SS12000Client {
     async getGrades(params = {}) {
         const mappedParams = {
             'student': params.student,
-            'schoolUnit': params.schoolUnit,
             'registeredBy': params.registeredBy,
             'gradingTeacher': params.gradingTeacher,
-            'group': params.group,
-            'registeredDate.onOrBefore': params.registeredDateOnOrBefore,
-            'registeredDate.onOrAfter': params.registeredDateOnOrAfter,
-            'gradeValue': params.gradeValue,
-            'finalGrade': params.finalGrade,
-            'trial': params.trial,
-            'adaptedStudyPlan': params.adaptedStudyPlan,
-            'correctionType': params.correctionType,
-            'converted': params.converted,
-            'semester': params.semester,
-            'year.onOrBefore': params.yearOnOrBefore,
-            'year.onOrAfter': params.yearOnOrAfter,
-            'syllabus': params.syllabus,
-            'meta.created.before': params.metaCreatedBefore,
-            'meta.created.after': params.metaCreatedAfter,
-            'meta.modified.before': params.metaModifiedBefore,
-            'meta.modified.after': params.metaModifiedAfter,
+            'orginsation': params.orginsation,
+            'registeredDate.onOrBefore': params.registeredDate.onOrBefore,
+            'registeredDate.onOrAfter': params.registeredDate.onOrAfter,
+            'meta.created.before': params.meta.created.before,
+            'meta.created.after': params.meta.created.after,
+            'meta.modified.before': params.meta.modified.before,
+            'meta.modified.after': params.meta.modified.after,
             'expand': params.expand,
             'expandReferenceNames': params.expandReferenceNames,
             'sortkey': params.sortkey,
@@ -1614,12 +1529,11 @@ class SS12000Client {
      * Get multiple grades based on a list of IDs.
      * @param {Object} body - Request body.
      * @param {string[]} [body.ids] - List of grade IDs.
-     * @param {string[]} [expand] - Describes if expanded data should be fetched.
      * @param {boolean} [expandReferenceNames] - Return `displayName` for all referenced objects.
      * @returns {Promise<Object>} - A list of grades.
      */
-    async lookupGrades(body, expand = [], expandReferenceNames = false) {
-        const params = { expand, expandReferenceNames };
+    async lookupGrades(body, expandReferenceNames = false) {
+        const params = { expandReferenceNames };
         const url = new URL(`${this.baseUrl}/grades/lookup`);
         Object.keys(params).forEach(key => {
             if (params[key] !== undefined && params[key] !== null) {
@@ -1652,69 +1566,69 @@ class SS12000Client {
     /**
      * Get a grade by ID.
      * @param {string} id - ID of the grade.
-     * @param {string[]} [expand] - Describes if expanded data should be fetched.
      * @param {boolean} [expandReferenceNames] - Return `displayName` for all referenced objects.
      * @returns {Promise<Object>} - The grade object.
      */
-    async getGradeById(id, expand = [], expandReferenceNames = false) {
-        const params = { expand, expandReferenceNames };
+    async getGradeById(id, expandReferenceNames = false) {
+        const params = { expandReferenceNames };
         return this._get(`/grades/${id}`, params);
     }
 
-    // --- AggregatedAttendance Endpoints ---
+    // --- Absences Endpoints ---
 
     /**
-     * Get a list of aggregated attendances.
+     * Get a list of asences.
      * @param {Object} [params={}] - Filter parameters.
-     * @param {string} [params.activity] - ID of the activity.
+     * @param {string} [params.orginsation] - ID of the group.
      * @param {string} [params.student] - ID of the student.
-     * @param {string} [params.startDateOnOrBefore] - Only aggregated attendances starting on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.startDateOnOrAfter] - Only aggregated attendances starting after this timestamp (RFC 3339 format).
-     * @param {string} [params.endDateOnOrBefore] - Only aggregated attendances ending on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.endDateOnOrAfter] - Only aggregated attendances ending after this timestamp (RFC 3339 format).
-     * @param {string} [params.metaCreatedBefore] - Only aggregated attendances created on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.metaCreatedAfter] - Only aggregated attendances created after this timestamp (RFC 3339 format).
-     * @param {string} [params.metaModifiedBefore] - Only aggregated attendances modified on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.metaModifiedAfter] - Only aggregated attendances modified after this timestamp (RFC 3339 format).
-     * @param {string[]} [params.expand] - Describes if expanded data should be fetched (e.g. "activity", "student").
+     * @param {string} [params.registeredBy] - ID of the person who registered the grade.
+     * @param {string} [params.type]
+     * @param {string} [params.startDate.onOrBefore] - Only schedules starting on or before this timestamp (RFC 3339 format).
+     * @param {string} [params.startDate.onOrAfter] - Only schedules starting after this timestamp (RFC 3339 format).
+     * @param {string} [params.endDate.onOrBefore] - Only schedules ending on or before this timestamp (RFC 3339 format).
+     * @param {string} [params.endDate.onOrAfter] - Only schedules ending after this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.created.before] - Only grades created on or before this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.created.after] - Only grades created after this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.modified.before] - Only grades modified on or before this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.modified.after] - Only grades modified after this timestamp (RFC 3339 format).
      * @param {boolean} [params.expandReferenceNames] - Return `displayName` for all referenced objects.
      * @param {string} [params.sortkey] - Sort order (e.g. "ModifiedDesc", "DisplayNameAsc").
      * @param {number} [params.limit] - Number of entities to show.
      * @param {string} [params.pageToken] - An opaque value that the server has returned to a previous query.
-     * @returns {Promise<Object>} - A list of aggregated attendances.
+     * @returns {Promise<Object>} - A list of grades.
      */
-    async getAggregatedAttendances(params = {}) {
+    async getAbsences(params = {}) {
         const mappedParams = {
-            'activity': params.activity,
+            'orginsation': params.orginsation,
             'student': params.student,
-            'startDate.onOrBefore': params.startDateOnOrBefore,
-            'startDate.onOrAfter': params.startDateOnOrAfter,
-            'endDate.onOrBefore': params.endDateOnOrBefore,
-            'endDate.onOrAfter': params.endDateOnOrAfter,
-            'meta.created.before': params.metaCreatedBefore,
-            'meta.created.after': params.metaCreatedAfter,
-            'meta.modified.before': params.metaModifiedBefore,
-            'meta.modified.after': params.metaModifiedAfter,
-            'expand': params.expand,
+            'registeredBy': params.registeredBy,
+            'type': params.type,
+            'startDate.onOrBefore': params.startDate.onOrBefore,
+            'startDate.onOrAfter': params.startDate.onOrAfter,
+            'endDate.onOrBefore': params.endDate.onOrBefore,
+            'endDate.onOrAfter': params.endDate.onOrAfter,
+            'meta.created.before': params.meta.created.before,
+            'meta.created.after': params.meta.created.after,
+            'meta.modified.before': params.meta.modified.before,
+            'meta.modified.after': params.meta.modified.after,
             'expandReferenceNames': params.expandReferenceNames,
             'sortkey': params.sortkey,
             'limit': params.limit,
             'pageToken': params.pageToken,
         };
-        return this._get('/aggregatedAttendance', mappedParams);
+        return this._get('/absences', mappedParams);
     }
 
     /**
-     * Get multiple aggregated attendances based on a list of IDs.
+     * Get multiple absences based on a list of IDs.
      * @param {Object} body - Request body.
-     * @param {string[]} [body.ids] - List of aggregated attendance IDs.
-     * @param {string[]} [expand] - Describes if expanded data should be fetched.
+     * @param {string[]} [body.ids] - List of absence IDs.
      * @param {boolean} [expandReferenceNames] - Return `displayName` for all referenced objects.
-     * @returns {Promise<Object>} - A list of aggregated attendances.
+     * @returns {Promise<Object>} - A list of grades.
      */
-    async lookupAggregatedAttendances(body, expand = [], expandReferenceNames = false) {
-        const params = { expand, expandReferenceNames };
-        const url = new URL(`${this.baseUrl}/aggregatedAttendance/lookup`);
+    async lookupAbsences(body, expandReferenceNames = false) {
+        const params = { expandReferenceNames };
+        const url = new URL(`${this.baseUrl}/absences/lookup`);
         Object.keys(params).forEach(key => {
             if (params[key] !== undefined && params[key] !== null) {
                 if (Array.isArray(params[key])) {
@@ -1744,28 +1658,57 @@ class SS12000Client {
     }
 
     /**
-     * Get an aggregated attendance by ID.
-     * @param {string} id - ID of the aggregated attendance.
-     * @param {string[]} [expand] - Describes if expanded data should be fetched.
-     * @param {boolean} [expandReferenceNames] - Return `displayName` for all referenced objects.
-     * @returns {Promise<Object>} - The aggregated attendance object.
+     * Get an absence by ID.
+     * @param {string} id - ID of the absence.
+     * @returns {Promise<Object>} - The grade object.
      */
-    async getAggregatedAttendanceById(id, expand = [], expandReferenceNames = false) {
-        const params = { expand, expandReferenceNames };
-        return this._get(`/aggregatedAttendance/${id}`, params);
+    async getabsenceById(id) {
+        return this._get(`/absences/${id}`);
     }
+
+// --- AggregatedAttendance Endpoints ---
+
+    /**
+     * Get a list of aggregated attendances.
+     * @param {Object} [params={}] - Filter parameters.
+     * @param {string} [params.startDate] - Only aggregated attendances starting on or before this timestamp (RFC 3339 format).
+     * @param {string} [params.endDate] - Only aggregated attendances starting after this timestamp (RFC 3339 format).
+     * @param {string} [params.organisation] - ID of the organisation.
+     * @param {string} [params.schoolType]  - ID of the school type.
+     * @param {string} [params.student] - ID of the student.
+     * @param {string[]} [params.expand] - Describes if expanded data should be fetched (e.g. "activity", "student").
+     * @param {boolean} [params.expandReferenceNames] - Return `displayName` for all referenced objects.
+     * @param {number} [params.limit] - Number of entities to show.
+     * @param {string} [params.pageToken] - An opaque value that the server has returned to a previous query.
+     * @returns {Promise<Object>} - A list of aggregated attendances.
+     */
+    async getAggregatedAttendances(params = {}) {
+        const mappedParams = {
+            'startDate.onOrBefore': params.startDate,
+            'endDate.onOrBefore': params.endDate,
+            'organisation': params.organisation,
+            'schoolType': params.schoolType,
+            'student': params.student,
+            'expand': params.expand,
+            'expandReferenceNames': params.expandReferenceNames,
+            'limit': params.limit,
+            'pageToken': params.pageToken,
+        };
+        return this._get('/aggregatedAttendance', mappedParams);
+    }
+
+    /** lookup and individual aggregated attendance by ID not implemented ... since they don't make sense in the context of aggregated attendance to have 
 
     // --- Resources Endpoints ---
 
     /**
      * Get a list of resources.
      * @param {Object} [params={}] - Filter parameters.
-     * @param {string} [params.owner] - ID of the owner.
-     * @param {string} [params.nameContains] - Filter by resource name containing this string.
-     * @param {string} [params.metaCreatedBefore] - Only resources created on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.metaCreatedAfter] - Only resources created after this timestamp (RFC 3339 format).
-     * @param {string} [params.metaModifiedBefore] - Only resources modified on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.metaModifiedAfter] - Only resources modified after this timestamp (RFC 3339 format).
+     * @param {string} [params.organisation] - ID of the organisation.
+     * @param {string} [params.meta.created.before] - Only resources created on or before this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.created.after] - Only resources created after this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.modified.before] - Only resources modified on or before this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.modified.after] - Only resources modified after this timestamp (RFC 3339 format).
      * @param {boolean} [params.expandReferenceNames] - Return `displayName` for all referenced objects.
      * @param {string} [params.sortkey] - Sort order (e.g. "ModifiedDesc", "DisplayNameAsc").
      * @param {number} [params.limit] - Number of entities to show.
@@ -1774,12 +1717,11 @@ class SS12000Client {
      */
     async getResources(params = {}) {
         const mappedParams = {
-            'owner': params.owner,
-            'nameContains': params.nameContains,
-            'meta.created.before': params.metaCreatedBefore,
-            'meta.created.after': params.metaCreatedAfter,
-            'meta.modified.before': params.metaModifiedBefore,
-            'meta.modified.after': params.metaModifiedAfter,
+            'organisation': params.organisation,
+            'meta.created.before': params.meta.created.before,
+            'meta.created.after': params.meta.created.after,
+            'meta.modified.before': params.meta.modified.before,
+            'meta.modified.after': params.meta.modified.after,
             'expandReferenceNames': params.expandReferenceNames,
             'sortkey': params.sortkey,
             'limit': params.limit,
@@ -1838,12 +1780,11 @@ class SS12000Client {
     /**
      * Get a list of rooms.
      * @param {Object} [params={}] - Filter parameters.
-     * @param {string} [params.owner] - ID of the owner.
-     * @param {string} [params.nameContains] - Filter by room name containing this string.
-     * @param {string} [params.metaCreatedBefore] - Only rooms created on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.metaCreatedAfter] - Only rooms created after this timestamp (RFC 3339 format).
-     * @param {string} [params.metaModifiedBefore] - Only rooms modified on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.metaModifiedAfter] - Only rooms modified after this timestamp (RFC 3339 format).
+     * @param {string} [params.organisation] - ID of the owner.
+     * @param {string} [params.meta.created.before] - Only rooms created on or before this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.created.after] - Only rooms created after this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.modified.before] - Only rooms modified on or before this timestamp (RFC 3339 format).
+     * @param {string} [params.meta.modified.after] - Only rooms modified after this timestamp (RFC 3339 format).
      * @param {boolean} [params.expandReferenceNames] - Return `displayName` for all referenced objects.
      * @param {string} [params.sortkey] - Sort order (e.g. "ModifiedDesc", "DisplayNameAsc").
      * @param {number} [params.limit] - Number of entities to show.
@@ -1852,12 +1793,11 @@ class SS12000Client {
      */
     async getRooms(params = {}) {
         const mappedParams = {
-            'owner': params.owner,
-            'nameContains': params.nameContains,
-            'meta.created.before': params.metaCreatedBefore,
-            'meta.created.after': params.metaCreatedAfter,
-            'meta.modified.before': params.metaModifiedBefore,
-            'meta.modified.after': params.metaModifiedAfter,
+            'owner': params.organisation,
+            'meta.created.before': params.meta.created.before,
+            'meta.created.after': params.meta.created.after,
+            'meta.modified.before': params.meta.modified.before,
+            'meta.modified.after': params.meta.modified.after,
             'expandReferenceNames': params.expandReferenceNames,
             'sortkey': params.sortkey,
             'limit': params.limit,
@@ -1965,95 +1905,89 @@ class SS12000Client {
         return this._patch(`/subscriptions/${id}`, body);
     }
 
-    // --- DeletedEntities Endpoint ---
-
-    /**
-     * Get a list of deleted entities.
-     * @param {Object} [params={}] - Filter parameters.
-     * @param {string[]} params.entities - List of entity types to query for deleted IDs.
-     * @param {string} [params.metaModifiedAfter] - Only return entities deleted after this timestamp (RFC 3339 format).
-     * @returns {Promise<Object>} - A list of deleted entities.
-     */
-    async getDeletedEntities(params = {}) {
-        const mappedParams = {
-            'entities': params.entities,
-            'meta.modified.after': params.metaModifiedAfter,
-        };
-        return this._get('/deletedEntities', mappedParams);
-    }
-
     // --- Log Endpoint ---
 
     /**
-     * Get a list of log entries.
-     * @param {Object} [params={}] - Filter parameters.
-     * @param {string} [params.source] - Source of the log entry.
-     * @param {string} [params.target] - Target of the log entry.
-     * @param {string} [params.eventType] - Type of the event (e.g. "Create", "Update", "Delete").
-     * @param {string} [params.timestampOnOrBefore] - Only log entries on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.timestampOnOrAfter] - Only log entries on or after this timestamp (RFC 3339 format).
-     * @param {string} [params.metaCreatedBefore] - Only log entries created on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.metaCreatedAfter] - Only log entries created after this timestamp (RFC 3339 format).
-     * @param {string} [params.metaModifiedBefore] - Only log entries modified on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.metaModifiedAfter] - Only log entries modified after this timestamp (RFC 3339 format).
-     * @param {string} [params.sortkey] - Sort order (e.g. "TimestampDesc", "DisplayNameAsc").
-     * @param {number} [params.limit] - Number of entities to show.
-     * @param {string} [params.pageToken] - An opaque value that the server has returned to a previous query.
-     * @returns {Promise<Object>} - A list of log entries.
+     * Creates a log post
+     * @param {Object} body - Object according to components/schemas/LogEntry.
+     * @returns {Promise<boolean>} 
+     * @throws {Error} 
      */
-    async getLog(params = {}) {
-        const mappedParams = {
-            'source': params.source,
-            'target': params.target,
-            'eventType': params.eventType,
-            'timestamp.onOrBefore': params.timestampOnOrBefore,
-            'timestamp.onOrAfter': params.timestampOnOrAfter,
-            'meta.created.before': params.metaCreatedBefore,
-            'meta.created.after': params.metaCreatedAfter,
-            'meta.modified.before': params.metaModifiedBefore,
-            'meta.modified.after': params.metaModifiedAfter,
-            'sortkey': params.sortkey,
-            'limit': params.limit,
-            'pageToken': params.pageToken,
-        };
-        return this._get('/log', mappedParams);
+    async postLog(body) {
+        if (!body || typeof body !== 'object') throw new Error('body (LogEntry) is required');
+
+        // säkerställ att baseUrl inte får dubbla snedstreck
+        const url = new URL(`${this.baseUrl}/log/`);
+
+        try {
+            const response = await fetch(url.toString(), {
+                method: 'POST',
+                headers: this.headers,
+                body: JSON.stringify(body),
+            });
+
+            if (!response.ok) {
+                const errorBody = await response.json().catch(() => ({ message: response.statusText }));
+                throw new Error(`API call failed: ${response.status} ${response.statusText} - ${JSON.stringify(errorBody)}`);
+            }
+            return response.json();
+        } catch (error) {
+            console.error(`Error during POST call to ${url.toString()}:`, error);
+            throw error;
+        }
     }
 
     // --- Statistics Endpoint ---
 
     /**
-     * Get a list of statistics.
-     * @param {Object} [params={}] - Filter parameters.
-     * @param {string} [params.source] - Source of the statistics.
-     * @param {string} [params.target] - Target of the statistics.
-     * @param {string} [params.statisticType] - Type of the statistic (e.g. "Attendance", "Grades").
-     * @param {string} [params.timestampOnOrBefore] - Only statistics on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.timestampOnOrAfter] - Only statistics on or after this timestamp (RFC 3339 format).
-     * @param {string} [params.metaCreatedBefore] - Only statistics created on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.metaCreatedAfter] - Only statistics created after this timestamp (RFC 3339 format).
-     * @param {string} [params.metaModifiedBefore] - Only statistics modified on or before this timestamp (RFC 3339 format).
-     * @param {string} [params.metaModifiedAfter] - Only statistics modified after this timestamp (RFC 3339 format).
-     * @param {string} [params.sortkey] - Sort order (e.g. "TimestampDesc", "DisplayNameAsc").
-     * @param {number} [params.limit] - Number of entities to show.
-     * @param {string} [params.pageToken] - An opaque value that the server has returned to a previous query.
-     * @returns {Promise<Object>} - A list of statistics.
+     * Creates a statistics post
+     * @param {Object} body - Object according to components/schemas/StatisticsEntry.
+     * @returns {Promise<boolean>} 
+     * @throws {Error} 
      */
-    async getStatistics(params = {}) {
+    async postStatistics(body) {
+        if (!body || typeof body !== 'object') throw new Error('body (StatisticsEntry) is required');
+
+        // säkerställ att baseUrl inte får dubbla snedstreck
+        const url = new URL(`${this.baseUrl}/statistics/`);
+
+        try {
+            const response = await fetch(url.toString(), {
+                method: 'POST',
+                headers: this.headers,
+                body: JSON.stringify(body),
+            });
+
+            if (!response.ok) {
+                const errorBody = await response.json().catch(() => ({ message: response.statusText }));
+                throw new Error(`API call failed: ${response.status} ${response.statusText} - ${JSON.stringify(errorBody)}`);
+            }
+            return response.json();
+        } catch (error) {
+            console.error(`Error during POST call to ${url.toString()}:`, error);
+            throw error;
+        }
+    }
+
+    // --- DeletedEntities Endpoint ---
+
+    /**
+     * Get a list of deleted entities.
+     * @param {Object} [params={}] - Filter parameters.
+     * @param {string} params.after - date-time
+     * @param {string[]} [params.entities] - List of entity types to filter by (e.g. "Person", "Organisation").
+     * @param {string} [params.limit] - Number of entities to show.
+     * @param {string} [params.pageToken] - An opaque value that the server has returned to a previous query.
+     * @returns {Promise<Object>} - A list of deleted entities.
+     */
+    async getDeletedEntities(params = {}) {
         const mappedParams = {
-            'source': params.source,
-            'target': params.target,
-            'statisticType': params.statisticType,
-            'timestamp.onOrBefore': params.timestampOnOrBefore,
-            'timestamp.onOrAfter': params.timestampOnOrAfter,
-            'meta.created.before': params.metaCreatedBefore,
-            'meta.created.after': params.metaCreatedAfter,
-            'meta.modified.before': params.metaModifiedBefore,
-            'meta.modified.after': params.metaModifiedAfter,
-            'sortkey': params.sortkey,
+            'after': params.after,
+            'entities': params.entities,
             'limit': params.limit,
             'pageToken': params.pageToken,
         };
-        return this._get('/statistics', mappedParams);
+        return this._get('/deletedEntities', mappedParams);
     }
 }
 
