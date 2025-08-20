@@ -175,14 +175,14 @@ class SS12000Client {
     // --- Organisation Endpoints ---
 
     /**
-     * Hämta en lista med organisationer.
+     * Fetch a list of organisations.
      * @param {Object} [params={}] - Filter parameters.
      * @param {string[]} [params.parent] 
      * @param {string[]} [params.schoolUnitCode] 
      * @param {string[]} [params.organisationCode] 
      * @param {string} [params.municipalityCode] 
-     * @param {string[]} [params.type] - e.g. "Huvudman", "Skolenhet".
-     * @param {string[]} [params.schoolTypes] 
+     * @param {string[]} [params.type] - ref: '#/components/schemas/OrganisationTypeEnum'
+     * @param {string[]} [params.schoolTypes] - ref: '#/components/schemas/SchoolTypesEnum'
      * @param {string} [params.startDate.onOrBefore] 
      * @param {string} [params.startDate.onOrAfter] 
      * @param {string} [params.endDate.onOrBefore] 
@@ -192,7 +192,7 @@ class SS12000Client {
      * @param {string} [params.meta.modified.before] 
      * @param {string} [params.meta.modified.after] 
      * @param {boolean} [params.expandReferenceNames] 
-     * @param {string} [params.sortkey] - Sort order (e.g. "ModifiedDesc", "DisplayNameAsc").
+     * @param {string} [params.sortkey] - ModifiedDesc, DisplayNameAsc
      * @param {number} [params.limit] - Number of entities to show.
      * @param {string} [params.pageToken] - An opaque value that the server has returned to a previous query.
      * @returns {Promise<Object>} - A list of organisations.
@@ -278,22 +278,22 @@ class SS12000Client {
      * @param {string} [params.eduPersonPrincipalName]
      * @param {string} [params.identifier.value] - references `externalIdentifiers.value`.
      * @param {string} [params.identifier.context] - references `externalIdentifiers.context`.
-     * @param {string} [params.relationship.entity.type]
+     * @param {string} [params.relationship.entity.type] - enrolment, duty, placement.child, placement.owner, responsibleFor.enrolment, responsibleFor.placement, groupMembership
      * @param {string} [params.relationship.organisation]
      * @param {string} [params.relationship.startDate.onOrBefore] - RFC 3339 format
      * @param {string} [params.relationship.startDate.onOrAfter] - RFC 3339 format
      * @param {string} [params.relationship.endDate.onOrBefore] - RFC 3339 format
      * @param {string} [params.relationship.endDate.onOrAfter] - RFC 3339 format
-     * @param {string} [params.meta.created.before] - Endast poster skapade på eller före detta timestamp (RFC 3339 format).
-     * @param {string} [params.meta.created.after] - Endast poster skapade efter detta timestamp (RFC 3339 format).
-     * @param {string} [params.meta.modified.before] - Endast poster modifierade på eller före detta timestamp (RFC 3339 format).
-     * @param {string} [params.meta.modified.after] - Endast poster modifierade efter detta timestamp (RFC 3339 format).
-     * @param {string[]} [params.expand] - Beskriver om expanderade data ska hämtas (t.ex. "duties", "responsibleFor").
-     * @param {boolean} [params.expandReferenceNames] - Returnera `displayName` för alla refererade objekt.
-     * @param {string} [params.sortkey] - Anger hur resultatet ska sorteras (t.ex. "DisplayNameAsc", "ModifiedDesc").
-     * @param {number} [params.limit] - Antal poster som ska visas i resultatet.
-     * @param {string} [params.pageToken] - Ett opakt värde som servern givit som svar på en tidigare ställd fråga.
-     * @returns {Promise<Object>} - En lista med personer.
+     * @param {string} [params.meta.created.before] - RFC 3339 format.
+     * @param {string} [params.meta.created.after] -  RFC 3339 format.
+     * @param {string} [params.meta.modified.before] - RFC 3339 format.
+     * @param {string} [params.meta.modified.after] - RFC 3339 format.
+     * @param {string[]} [params.expand] - duties, responsibleFor, placements, ownedPlacements, groupMemberships
+     * @param {boolean} [params.expandReferenceNames] - Return `displayName` for all referenced objects.
+     * @param {string} [params.sortkey] - DisplayNameAsc, GivenNameDesc, GivenNameAsc, FamilyNameDesc, FamilyNameAsc, CivicNoAsc, CivicNoDesc, ModifiedDesc
+     * @param {number} [params.limit] - Number of entities to show.
+     * @param {string} [params.pageToken] - An opaque value that the server has returned to a previous query.
+     * @returns {Promise<Object>} - A list of persons.
      */
     async getPersons(params = {}) {
         const mappedParams = {
@@ -326,7 +326,7 @@ class SS12000Client {
      * @param {Object} body - Request body.
      * @param {string[]} [body.ids] - List of person IDs.
      * @param {string[]} [body.civicNos] - List of civic numbers.
-     * @param {string[]} [expand] - Describes if expanded data should be fetched.
+     * @param {string[]} [expand] - duties, responsibleFor, placements, ownedPlacements, groupMemberships
      * @param {boolean} [expandReferenceNames] - Return `displayName` for all referenced objects.
      * @returns {Promise<Object>} - A list of persons.
      */
@@ -364,7 +364,7 @@ class SS12000Client {
     /**
      * Get a person by person ID.
      * @param {string} id - ID of the person.
-     * @param {string[]} [expand] - Describes if expanded data should be fetched.
+     * @param {string[]} [expand] - duties, responsibleFor, placements, ownedPlacements, groupMemberships
      * @param {boolean} [expandReferenceNames] - Return `displayName` for all referenced objects.
      * @returns {Promise<Object>} - The person object.
      */
@@ -390,8 +390,9 @@ class SS12000Client {
      * @param {string} [params.meta.created.after] - Only placements created after this timestamp (RFC 3339 format).
      * @param {string} [params.meta.modified.before] - Only placements modified on or before this timestamp (RFC 3339 format).
      * @param {string} [params.meta.modified.after] - Only placements modified after this timestamp (RFC 3339 format).
+     * @param {string[]} [params.expand] - child, owner
      * @param {boolean} [params.expandReferenceNames] - Return `displayName` for all referenced objects.
-     * @param {string} [params.sortkey] - Sort order (e.g. "ModifiedDesc", "DisplayNameAsc").
+     * @param {string} [params.sortkey] - StartDateAsc, StartDateDesc, EndDateAsc, EndDateDesc, ModifiedDesc
      * @param {number} [params.limit] - Number of entities to show.
      * @param {string} [params.pageToken] - An opaque value that the server has returned to a previous query.
      * @returns {Promise<Object>} - A list of placements.
@@ -423,7 +424,7 @@ class SS12000Client {
      * Get multiple placements based on a list of IDs.
      * @param {Object} body - Request body.
      * @param {string[]} [body.ids] - List of placement IDs.
-     * @param {string[]} [expand] - Describes if expanded data should be fetched.
+     * @param {string[]} [expand] - child, owner
      * @param {boolean} [expandReferenceNames] - Return `displayName` for all referenced objects.
      * @returns {Promise<Object>} - A list of placements.
      */
@@ -461,7 +462,7 @@ class SS12000Client {
     /**
      * Get a placement by ID.
      * @param {string} id - ID of the placement.
-     * @param {string[]} [expand] - Describes if expanded data should be fetched.
+     * @param {string[]} [expand] - child, owner
      * @param {boolean} [expandReferenceNames] - Return `displayName` for all referenced objects.
      * @returns {Promise<Object>} - The placement object.
      */
@@ -477,7 +478,7 @@ class SS12000Client {
      * @param {Object} [params={}] - Filter parameters.
      * @param {string} [params.person]
      * @param {string} [params.organisation]
-     * @param {string[]} [params.dutyRole] - List of duty roles (e.g. "Teacher", "Principal").
+     * @param {string[]} [params.dutyRole] - ref: '#/components/schemas/DutyRole'
      * @param {string} [params.startDate.onOrBefore] - Only duties starting on or before this timestamp (RFC 3339 format).
      * @param {string} [params.startDate.onOrAfter] - Only duties starting after this timestamp (RFC 3339 format).
      * @param {string} [params.endDate.onOrBefore] - Only duties ending on or before this timestamp (RFC 3339 format).
@@ -486,9 +487,9 @@ class SS12000Client {
      * @param {string} [params.meta.created.after] - Only duties created after this timestamp (RFC 3339 format).
      * @param {string} [params.meta.modified.before] - Only duties modified on or before this timestamp (RFC 3339 format).
      * @param {string} [params.meta.modified.after] - Only duties modified after this timestamp (RFC 3339 format).
-     * @param {string[]} [params.expand] - Describes if expanded data should be fetched (e.g. "person", "dutyAt").
+     * @param {string[]} [params.expand] - person
      * @param {boolean} [params.expandReferenceNames] - Return `displayName` for all referenced objects.
-     * @param {string} [params.sortkey] - Sort order (e.g. "ModifiedDesc", "DisplayNameAsc").
+     * @param {string} [params.sortkey] - StartDateDesc, StartDateAsc, ModifiedDesc
      * @param {number} [params.limit] - Number of entities to show.
      * @param {string} [params.pageToken] - An opaque value that the server has returned to a previous query.
      * @returns {Promise<Object>} - A list of duties.
@@ -519,7 +520,7 @@ class SS12000Client {
      * Get multiple duties based on a list of IDs.
      * @param {Object} body - Request body.
      * @param {string[]} [body.ids] - List of duty IDs.
-     * @param {string[]} [expand] - Describes if expanded data should be fetched.
+     * @param {string[]} [expand] - person
      * @param {boolean} [expandReferenceNames] - Return `displayName` for all referenced objects.
      * @returns {Promise<Object>} - A list of duties.
      */
@@ -557,7 +558,7 @@ class SS12000Client {
     /**
      * Get a duty by ID.
      * @param {string} id - ID of the duty.
-     * @param {string[]} [expand] - Describes if expanded data should be fetched.
+     * @param {string[]} [expand] - person
      * @param {boolean} [expandReferenceNames] - Return `displayName` for all referenced objects.
      * @returns {Promise<Object>} - The duty object.
      */
@@ -571,8 +572,8 @@ class SS12000Client {
     /**
      * Get a list of groups.
      * @param {Object} [params={}] - Filter parameters.
-     * @param {string[]} [params.groupType] - List of group types (e.g. "Class", "Course").
-     * @param {string[]} [params.schoolTypes] - List of school types (e.g. "Gymnasieskola", "Grundskola").
+     * @param {string[]} [params.groupType] - ref: '#/components/schemas/GroupTypesEnum'
+     * @param {string[]} [params.schoolTypes] - ref: '#/components/schemas/SchoolTypesEnum'
      * @param {string[]} [params.organisation] - List of organisation IDs.
      * @param {string} [params.startDate.onOrBefore] - Only groups starting on or before this timestamp (RFC 3339 format).
      * @param {string} [params.startDate.onOrAfter] - Only groups starting after this timestamp (RFC 3339 format).
@@ -582,9 +583,9 @@ class SS12000Client {
      * @param {string} [params.meta.created.after] - Only groups created after this timestamp (RFC 3339 format).
      * @param {string} [params.meta.modified.before] - Only groups modified on or before this timestamp (RFC 3339 format).
      * @param {string} [params.meta.modified.after] - Only groups modified after this timestamp (RFC 3339 format).
-     * @param {string[]} [params.expand] - Describes if expanded data should be fetched (e.g. "members", "teachers").
+     * @param {string[]} [params.expand] - assignmentRoles
      * @param {boolean} [params.expandReferenceNames] - Return `displayName` for all referenced objects.
-     * @param {string} [params.sortkey] - Sort order (e.g. "ModifiedDesc", "DisplayNameAsc").
+     * @param {string} [params.sortkey] - ModifiedDesc, DisplayNameAsc, StartDateAsc, StartDateDesc, EndDateAsc, EndDateDesc
      * @param {number} [params.limit] - Number of entities to show.
      * @param {string} [params.pageToken] - An opaque value that the server has returned to a previous query.
      * @returns {Promise<Object>} - A list of groups.
@@ -615,7 +616,7 @@ class SS12000Client {
      * Get multiple groups based on a list of IDs.
      * @param {Object} body - Request body.
      * @param {string[]} [body.ids] - List of group IDs.
-     * @param {string[]} [expand] - Describes if expanded data should be fetched.
+     * @param {string[]} [expand] - assignmentRoles
      * @param {boolean} [expandReferenceNames] - Return `displayName` for all referenced objects.
      * @returns {Promise<Object>} - A list of groups.
      */
@@ -653,7 +654,7 @@ class SS12000Client {
     /**
      * Get a group by ID.
      * @param {string} id - ID of the group.
-     * @param {string[]} [expand] - Describes if expanded data should be fetched.
+     * @param {string[]} [expand] - assignmentRoles
      * @param {boolean} [expandReferenceNames] - Return `displayName` for all referenced objects.
      * @returns {Promise<Object>} - The group object.
      */
@@ -668,15 +669,14 @@ class SS12000Client {
      * Get a list of programmes.
      * @param {Object} [params={}] - Filter parameters.
      * @param {string} [params.parentProgramme] - ID of the parent programme.
-     * @param {string} [params.schoolType] - School type (e.g. "Gymnasieskola", "Grundskola").
+     * @param {string} [params.schoolType] - ref: '#/components/schemas/SchoolTypesEnum'
      * @param {string} [params.code] - Programme code.
      * @param {string} [params.meta.created.before] - Only programmes created on or before this timestamp (RFC 3339 format).
      * @param {string} [params.meta.created.after] - Only programmes created after this timestamp (RFC 3339 format).
      * @param {string} [params.meta.modified.before] - Only programmes modified on or before this timestamp (RFC 3339 format).
      * @param {string} [params.meta.modified.after] - Only programmes modified after this timestamp (RFC 3339 format).
-     * @param {string[]} [params.expand] - Describes if expanded data should be fetched (e.g. "parentProgramme", "schoolType").
      * @param {boolean} [params.expandReferenceNames] - Return `displayName` for all referenced objects.
-     * @param {string} [params.sortkey] - Sort order (e.g. "ModifiedDesc", "DisplayNameAsc").
+     * @param {string} [params.sortkey] - NameAsc, CodeAsc, ModifiedDesc
      * @param {number} [params.limit] - Number of entities to show.
      * @param {string} [params.pageToken] - An opaque value that the server has returned to a previous query.
      * @returns {Promise<Object>} - A list of programmes.
@@ -690,7 +690,6 @@ class SS12000Client {
             'meta.created.after': params.meta.created.after,
             'meta.modified.before': params.meta.modified.before,
             'meta.modified.after': params.meta.modified.after,
-            'expand': params.expand,
             'expandReferenceNames': params.expandReferenceNames,
             'sortkey': params.sortkey,
             'limit': params.limit,
@@ -763,9 +762,8 @@ class SS12000Client {
      * @param {string} [params.meta.created.after] - Only study plans created after this timestamp (RFC 3339 format).
      * @param {string} [params.meta.modified.before] - Only study plans modified on or before this timestamp (RFC 3339 format).
      * @param {string} [params.meta.modified.after] - Only study plans modified after this timestamp (RFC 3339 format).
-     * @param {string[]} [params.expand] - Describes if expanded data should be fetched (e.g. "student", "courses").
      * @param {boolean} [params.expandReferenceNames] - Return `displayName` for all referenced objects.
-     * @param {string} [params.sortkey] - Sort order (e.g. "ModifiedDesc", "DisplayNameAsc").
+     * @param {string} [params.sortkey] - ModifiedDesc, StartDateAsc, StartDateDesc, EndDateAsc, EndDateDesc
      * @param {number} [params.limit] - Number of entities to show.
      * @param {string} [params.pageToken] - An opaque value that the server has returned to a previous query.
      * @returns {Promise<Object>} - A list of study plans.
@@ -781,7 +779,6 @@ class SS12000Client {
             'meta.created.after': params.meta.created.after,
             'meta.modified.before': params.meta.modified.before,
             'meta.modified.after': params.meta.modified.after,
-            'expand': params.expand,
             'expandReferenceNames': params.expandReferenceNames,
             'sortkey': params.sortkey,
             'limit': params.limit,
@@ -799,6 +796,7 @@ class SS12000Client {
      * @param {string[]} [expand] - Describes if expanded data should be fetched.
      * @param {boolean} [expandReferenceNames] - Return `displayName` for all referenced objects.
      * @returns {Promise<Object>} - A list of study plans.
+     
     async lookupStudyPlans(body, expand = [], expandReferenceNames = false) {
         const params = { expand, expandReferenceNames };
         const url = new URL(`${this.baseUrl}/studyplans/lookup`);
@@ -854,7 +852,7 @@ class SS12000Client {
      * @param {string} [params.meta.modified.before] - Only syllabuses modified on or before this timestamp (RFC 3339 format).
      * @param {string} [params.meta.modified.after] - Only syllabuses modified after this timestamp (RFC 3339 format).
      * @param {boolean} [params.expandReferenceNames] - Return `displayName` for all referenced objects.
-     * @param {string} [params.sortkey] - Sort order (e.g. "ModifiedDesc", "DisplayNameAsc").
+     * @param {string} [params.sortkey] - ModifiedDesc, StartDateAsc, StartDateDesc, EndDateAsc, EndDateDesc
      * @param {number} [params.limit] - Number of entities to show. 
      * @param {string} [params.pageToken] - An opaque value that the server has returned to a previous query.
      * @returns {Promise<Object>} - A list of syllabuses.
@@ -929,7 +927,7 @@ class SS12000Client {
      * @param {string} [params.meta.modified.before] - Only offerings modified on or before this timestamp (RFC 3339 format).
      * @param {string} [params.meta.modified.after] - Only offerings modified after this timestamp (RFC 3339 format).
      * @param {boolean} [params.expandReferenceNames] - Return `displayName` for all referenced objects.
-     * @param {string} [params.sortkey] - Sort order (e.g. "ModifiedDesc", "DisplayNameAsc").
+     * @param {string} [params.sortkey] - ModifiedDesc, StartDateAsc, StartDateDesc, EndDateAsc, EndDateDesc
      * @param {number} [params.limit] - Number of entities to show. 
      * @param {string} [params.pageToken] - An opaque value that the server has returned to a previous query.
      * @returns {Promise<Object>} - A list of school unit offerings.
@@ -1016,9 +1014,9 @@ class SS12000Client {
      * @param {string} [params.meta.created.after] - Only activities created after this timestamp (RFC 3339 format).
      * @param {string} [params.meta.modified.before] - Only activities modified on or before this timestamp (RFC 3339 format).
      * @param {string} [params.meta.modified.after] - Only activities modified after this timestamp (RFC 3339 format).
-     * @param {string[]} [params.expand] - Describes if expanded data should be fetched (e.g. "syllabus", "organisation").
+     * @param {string[]} [params.expand] - groups, teachers, syllabus
      * @param {boolean} [params.expandReferenceNames] - Return `displayName` for all referenced objects.
-     * @param {string} [params.sortkey] - Sort order (e.g. "ModifiedDesc", "DisplayNameAsc").
+     * @param {string} [params.sortkey] - ModifiedDesc, DisplayNameAsc
      * @param {number} [params.limit] - Number of entities to show. 
      * @param {string} [params.pageToken] - An opaque value that the server has returned to a previous query.
      * @returns {Promise<Object>} - A list of activities.
@@ -1050,7 +1048,7 @@ class SS12000Client {
      * Get multiple activities based on a list of IDs.
      * @param {Object} body - Request body.
      * @param {string[]} [body.ids] - List of activity IDs.
-     * @param {string[]} [expand] - Describes if expanded data should be fetched.
+     * @param {string[]} [expand] - groups, teachers, syllabus
      * @param {boolean} [expandReferenceNames] - Return `displayName` for all referenced objects.
      * @returns {Promise<Object>} - A list of activities.
      */
@@ -1088,7 +1086,7 @@ class SS12000Client {
     /**
      * Get an activity by ID.
      * @param {string} id - ID of the activity.
-     * @param {string[]} [expand] - Describes if expanded data should be fetched.
+     * @param {string[]} [expand] - groups, teachers, syllabus
      * @param {boolean} [expandReferenceNames] - Return `displayName` for all referenced objects.
      * @returns {Promise<Object>} - The activity object.
      */
@@ -1115,9 +1113,9 @@ class SS12000Client {
      * @param {string} [params.meta.created.after] - Only events created after this timestamp (RFC 3339 format).
      * @param {string} [params.meta.modified.before] - Only events modified on or before this timestamp (RFC 3339 format).
      * @param {string} [params.meta.modified.after] - Only events modified after this timestamp (RFC 3339 format).
-     * @param {string[]} [params.expand] - Describes if expanded data should be fetched (e.g. "activity", "room", "resource").
+     * @param {string[]} [params.expand] - activity, attendance
      * @param {boolean} [params.expandReferenceNames] - Return `displayName` for all referenced objects.
-     * @param {string} [params.sortkey] - Sort order (e.g. "ModifiedDesc", "DisplayNameAsc").
+     * @param {string} [params.sortkey] - ModifiedDesc, StartTimeAsc, StartTimeDesc
      * @param {number} [params.limit] - Number of entities to show.
      * @param {string} [params.pageToken] - An opaque value that the server has returned to a previous query.
      * @returns {Promise<Object>} - A list of calendar events.
@@ -1187,7 +1185,7 @@ class SS12000Client {
     /**
      * Get a calendar event by ID.
      * @param {string} id - ID of the calendar event.
-     * @param {string[]} [expand] - Describes if expanded data should be fetched.
+     * @param {string[]} [expand] - activity, attendance
      * @param {boolean} [expandReferenceNames] - Return `displayName` for all referenced objects.
      * @returns {Promise<Object>} - The calendar event object.
      */
@@ -1209,7 +1207,6 @@ class SS12000Client {
      * @param {string} [params.meta.modified.before] - Only attendances modified on or before this timestamp (RFC 3339 format).
      * @param {string} [params.meta.modified.after] - Only attendances modified after this timestamp (RFC 3339 format).
      * @param {boolean} [params.expandReferenceNames] - Return `displayName` for all referenced objects.
-     * @param {string} [params.sortkey] - Sort order (e.g. "ModifiedDesc", "DisplayNameAsc").
      * @param {number} [params.limit] - Number of entities to show.
      * @param {string} [params.pageToken] - An opaque value that the server has returned to a previous query.
      * @returns {Promise<Object>} - A list of attendances.
@@ -1224,11 +1221,36 @@ class SS12000Client {
             'meta.modified.before': params.meta.modified.before,
             'meta.modified.after': params.meta.modified.after,
             'expandReferenceNames': params.expandReferenceNames,
-            'sortkey': params.sortkey,
             'limit': params.limit,
             'pageToken': params.pageToken,
         };
         return this._get('/attendances', mappedParams);
+    }
+
+    /**
+     * Post an attandance
+     * 
+     * @param {Object} body - Request body. ref: #/components/schemas/Attendance
+     * @returns {Promise<void>}
+     */
+    async postAttendance(body) {
+        const url = new URL(`${this.baseUrl}/attendances`);
+        try {
+            const response = await fetch(url.toString(), {
+                method: 'POST',
+                headers: this.headers,
+                body: JSON.stringify(body),
+            });
+
+            if (!response.ok) {
+                const errorBody = await response.json().catch(() => ({ message: response.statusText }));
+                throw new Error(`API call failed: ${response.status} ${response.statusText} - ${JSON.stringify(errorBody)}`);
+            }
+            return response.json();
+        } catch (error) {
+            console.error(`Error during POST call to ${url.toString()}:`, error);
+            throw error;
+        }
     }
 
     /**
@@ -1272,13 +1294,10 @@ class SS12000Client {
     /**
      * Get an attendance by ID.
      * @param {string} id - ID of the attendance.
-     * @param {string[]} [expand] - Describes if expanded data should be fetched.
-     * @param {boolean} [expandReferenceNames] - Return `displayName` for all referenced objects.
      * @returns {Promise<Object>} - The attendance object.
      */
     async getAttendanceById(id, expand = [], expandReferenceNames = false) {
-        const params = { expand, expandReferenceNames };
-        return this._get(`/attendances/${id}`, params);
+        return this._get(`/attendances/${id}`);
     }
 
     /**
@@ -1301,7 +1320,7 @@ class SS12000Client {
      * @param {string} [params.meta.created.after] - Only events created after this timestamp (RFC 3339 format).
      * @param {string} [params.meta.modified.before] - Only events modified on or before this timestamp (RFC 3339 format).
      * @param {string} [params.meta.modified.after] - Only events modified after this timestamp (RFC 3339 format).
-     * @param {string[]} [params.expand] - Describes if expanded data should be fetched (e.g. "person", "registeredBy", "group", "room").
+     * @param {string[]} [params.expand] - person, group, registeredBy
      * @param {boolean} [params.expandReferenceNames] - Return `displayName` for all referenced objects.
      * @param {string} [params.sortkey] - Sort order (e.g. "ModifiedDesc", "DisplayNameAsc").
      * @param {number} [params.limit] - Number of entities to show.
@@ -1326,10 +1345,36 @@ class SS12000Client {
     }
 
     /**
+     * Post an attendance event
+     * 
+     * @param {Object} body - Request body. ref: #/components/schemas/AttendanceEvent
+     * @returns {Promise<void>}
+     */
+    async postAttendanceEvent(body) {
+        const url = new URL(`${this.baseUrl}/attendanceEvents`);
+        try {
+            const response = await fetch(url.toString(), {
+                method: 'POST',
+                headers: this.headers,
+                body: JSON.stringify(body),
+            });
+
+            if (!response.ok) {
+                const errorBody = await response.json().catch(() => ({ message: response.statusText }));
+                throw new Error(`API call failed: ${response.status} ${response.statusText} - ${JSON.stringify(errorBody)}`);
+            }
+            return response.json();
+        } catch (error) {
+            console.error(`Error during POST call to ${url.toString()}:`, error);
+            throw error;
+        }
+    }
+
+    /**
      * Get multiple attendance events based on a list of IDs.
      * @param {Object} body - Request body.
      * @param {string[]} [body.ids] - List of attendance event IDs.
-     * @param {string[]} [expand] - Describes if expanded data should be fetched.
+     * @param {string[]} [expand] - person, group, registeredBy
      * @param {boolean} [expandReferenceNames] - Return `displayName` for all referenced objects.
      * @returns {Promise<Object>} - A list of attendance events.
      */
@@ -1367,7 +1412,7 @@ class SS12000Client {
     /**
      * Get an attendance event by ID.
      * @param {string} id - ID of the attendance event.
-     * @param {string[]} [expand] - Describes if expanded data should be fetched.
+     * @param {string[]} [expand] - person, group, registeredBy
      * @param {boolean} [expandReferenceNames] - Return `displayName` for all referenced objects.
      * @returns {Promise<Object>} - The attendance event object.
      */
@@ -1421,6 +1466,32 @@ class SS12000Client {
             'pageToken': params.pageToken,
         };
         return this._get('/attendanceSchedules', mappedParams);
+    }
+
+    /**
+     * Post an attendance schedule
+     * 
+     * @param {Object} body - Request body. ref: #/components/schemas/AttendanceSchedule
+     * @returns {Promise<void>}
+     */
+    async postAttendanceSchedule(body) {
+        const url = new URL(`${this.baseUrl}/attendanceSchedules`);
+        try {
+            const response = await fetch(url.toString(), {
+                method: 'POST',
+                headers: this.headers,
+                body: JSON.stringify(body),
+            });
+
+            if (!response.ok) {
+                const errorBody = await response.json().catch(() => ({ message: response.statusText }));
+                throw new Error(`API call failed: ${response.status} ${response.statusText} - ${JSON.stringify(errorBody)}`);
+            }
+            return response.json();
+        } catch (error) {
+            console.error(`Error during POST call to ${url.toString()}:`, error);
+            throw error;
+        }
     }
 
     /**
@@ -1497,9 +1568,8 @@ class SS12000Client {
      * @param {string} [params.meta.created.after] - Only grades created after this timestamp (RFC 3339 format).
      * @param {string} [params.meta.modified.before] - Only grades modified on or before this timestamp (RFC 3339 format).
      * @param {string} [params.meta.modified.after] - Only grades modified after this timestamp (RFC 3339 format).
-     * @param {string[]} [params.expand] - Describes if expanded data should be fetched (e.g. "student", "schoolUnit", "gradingTeacher").
      * @param {boolean} [params.expandReferenceNames] - Return `displayName` for all referenced objects.
-     * @param {string} [params.sortkey] - Sort order (e.g. "ModifiedDesc", "DisplayNameAsc").
+     * @param {string} [params.sortkey] - registeredDateAsc, registeredDateDesc, ModifiedDesc
      * @param {number} [params.limit] - Number of entities to show.
      * @param {string} [params.pageToken] - An opaque value that the server has returned to a previous query.
      * @returns {Promise<Object>} - A list of grades.
@@ -1516,7 +1586,6 @@ class SS12000Client {
             'meta.created.after': params.meta.created.after,
             'meta.modified.before': params.meta.modified.before,
             'meta.modified.after': params.meta.modified.after,
-            'expand': params.expand,
             'expandReferenceNames': params.expandReferenceNames,
             'sortkey': params.sortkey,
             'limit': params.limit,
@@ -1582,7 +1651,7 @@ class SS12000Client {
      * @param {string} [params.orginsation] - ID of the group.
      * @param {string} [params.student] - ID of the student.
      * @param {string} [params.registeredBy] - ID of the person who registered the grade.
-     * @param {string} [params.type]
+     * @param {string} [params.type] - ref: '#/components/schemas/AbsenceEnum'
      * @param {string} [params.startDate.onOrBefore] - Only schedules starting on or before this timestamp (RFC 3339 format).
      * @param {string} [params.startDate.onOrAfter] - Only schedules starting after this timestamp (RFC 3339 format).
      * @param {string} [params.endDate.onOrBefore] - Only schedules ending on or before this timestamp (RFC 3339 format).
@@ -1592,7 +1661,7 @@ class SS12000Client {
      * @param {string} [params.meta.modified.before] - Only grades modified on or before this timestamp (RFC 3339 format).
      * @param {string} [params.meta.modified.after] - Only grades modified after this timestamp (RFC 3339 format).
      * @param {boolean} [params.expandReferenceNames] - Return `displayName` for all referenced objects.
-     * @param {string} [params.sortkey] - Sort order (e.g. "ModifiedDesc", "DisplayNameAsc").
+     * @param {string} [params.sortkey] - ModifiedDesc, StartTimeAsc, StartTimeDesc
      * @param {number} [params.limit] - Number of entities to show.
      * @param {string} [params.pageToken] - An opaque value that the server has returned to a previous query.
      * @returns {Promise<Object>} - A list of grades.
@@ -1617,6 +1686,32 @@ class SS12000Client {
             'pageToken': params.pageToken,
         };
         return this._get('/absences', mappedParams);
+    }
+
+    /**
+     * Post an absence
+     * 
+     * @param {Object} body - Request body. ref: #/components/schemas/Absence
+     * @returns {Promise<void>}
+     */
+    async postAbsence(body) {
+        const url = new URL(`${this.baseUrl}/absences`);
+        try {
+            const response = await fetch(url.toString(), {
+                method: 'POST',
+                headers: this.headers,
+                body: JSON.stringify(body),
+            });
+
+            if (!response.ok) {
+                const errorBody = await response.json().catch(() => ({ message: response.statusText }));
+                throw new Error(`API call failed: ${response.status} ${response.statusText} - ${JSON.stringify(errorBody)}`);
+            }
+            return response.json();
+        } catch (error) {
+            console.error(`Error during POST call to ${url.toString()}:`, error);
+            throw error;
+        }
     }
 
     /**
@@ -1674,9 +1769,9 @@ class SS12000Client {
      * @param {string} [params.startDate] - Only aggregated attendances starting on or before this timestamp (RFC 3339 format).
      * @param {string} [params.endDate] - Only aggregated attendances starting after this timestamp (RFC 3339 format).
      * @param {string} [params.organisation] - ID of the organisation.
-     * @param {string} [params.schoolType]  - ID of the school type.
+     * @param {string} [params.schoolType]  - ref: '#/components/schemas/SchoolTypesEnum'
      * @param {string} [params.student] - ID of the student.
-     * @param {string[]} [params.expand] - Describes if expanded data should be fetched (e.g. "activity", "student").
+     * @param {string[]} [params.expand] - activity, student
      * @param {boolean} [params.expandReferenceNames] - Return `displayName` for all referenced objects.
      * @param {number} [params.limit] - Number of entities to show.
      * @param {string} [params.pageToken] - An opaque value that the server has returned to a previous query.
@@ -1710,7 +1805,7 @@ class SS12000Client {
      * @param {string} [params.meta.modified.before] - Only resources modified on or before this timestamp (RFC 3339 format).
      * @param {string} [params.meta.modified.after] - Only resources modified after this timestamp (RFC 3339 format).
      * @param {boolean} [params.expandReferenceNames] - Return `displayName` for all referenced objects.
-     * @param {string} [params.sortkey] - Sort order (e.g. "ModifiedDesc", "DisplayNameAsc").
+     * @param {string} [params.sortkey] - ModifiedDesc, DisplayNameAsc
      * @param {number} [params.limit] - Number of entities to show.
      * @param {string} [params.pageToken] - An opaque value that the server has returned to a previous query.
      * @returns {Promise<Object>} - A list of resources.
@@ -1786,7 +1881,7 @@ class SS12000Client {
      * @param {string} [params.meta.modified.before] - Only rooms modified on or before this timestamp (RFC 3339 format).
      * @param {string} [params.meta.modified.after] - Only rooms modified after this timestamp (RFC 3339 format).
      * @param {boolean} [params.expandReferenceNames] - Return `displayName` for all referenced objects.
-     * @param {string} [params.sortkey] - Sort order (e.g. "ModifiedDesc", "DisplayNameAsc").
+     * @param {string} [params.sortkey] - ModifiedDesc, DisplayNameAsc
      * @param {number} [params.limit] - Number of entities to show.
      * @param {string} [params.pageToken] - An opaque value that the server has returned to a previous query.
      * @returns {Promise<Object>} - A list of rooms.
