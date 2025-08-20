@@ -1296,7 +1296,7 @@ class SS12000Client {
      * @param {string} id - ID of the attendance.
      * @returns {Promise<Object>} - The attendance object.
      */
-    async getAttendanceById(id, expand = [], expandReferenceNames = false) {
+    async getAttendanceById(id) {
         return this._get(`/attendances/${id}`);
     }
 
@@ -1549,7 +1549,7 @@ class SS12000Client {
      * @param {string} id - ID of the attendance to delete.
      * @returns {Promise<void>}
      */
-    async deleteAttendanceEventById(id) {
+    async deleteAttendanceScheduleById(id) {
         return this._delete(`/attendanceSchedules/${id}`);
     }
 
@@ -1757,7 +1757,7 @@ class SS12000Client {
      * @param {string} id - ID of the absence.
      * @returns {Promise<Object>} - The grade object.
      */
-    async getabsenceById(id) {
+    async getAbsenceById(id) {
         return this._get(`/absences/${id}`);
     }
 

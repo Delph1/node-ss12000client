@@ -56,21 +56,20 @@ You can fetch a list of organisations or a specific organisation using its ID.
 async function getOrganisationData() {  
     try {  
         console.log('fetching organisations...');  
-        const organisations \= await client.getOrganisations({ limit: 5 });  
+        const organisations = await client.getOrganisations({ limit: 5 });  
         console.log('Found organisations:', JSON.stringify(organisations, null, 2));
 
-        if (organisations.data && organisations.data.length \> 0\) {  
-            const firstOrgId \= organisations.data\[0\].id;  
-            console.log(\`Hämtar organisation med ID: ${firstOrgId}...\`);  
-            const organisation \= await client.getOrganisationById(firstOrgId, true); // expandReferenceNames \= true  
-            console.log('Hämtad organisation:', JSON.stringify(organisation, null, 2));  
+        if (organisations.data && organisations.data.length > 0) {  
+            const firstOrgId = organisations.data[0].id;  
+            console.log(`Fetching organisation with ID: ${firstOrgId}...`);  
+            const organisation = await client.getOrganisationById(firstOrgId, true); // expandReferenceNames = true  
+            console.log('Fetched organisation:', JSON.stringify(organisation, null, 2));  
         }  
     } catch (error) {  
         console.error('Error when fetching organisations:', error.message);  
     }  
 }
 
-// getOrganisationData(); // Avkommentera för att köra
 ```
 ### **Fetch Persons**
 
@@ -93,7 +92,6 @@ async function getPersonData() {
     }  
 }
 
-// getPersonData(); // Avkommentera för att köra
 ```
 ### **Fetch ...**
 
@@ -161,7 +159,6 @@ SS12000Client is designed to expose methods for all SS12000 API endpoints. Here 
 * /programmes/lookup  
 * /studyplans  
 * /studyplans/{id}  
-* /studyplans/lookup  
 * /syllabuses  
 * /syllabuses/{id}  
 * /syllabuses/lookup  
@@ -187,8 +184,6 @@ SS12000Client is designed to expose methods for all SS12000 API endpoints. Here 
 * /grades/{id}  
 * /grades/lookup  
 * /aggregatedAttendance  
-* /aggregatedAttendance/{id}  
-* /aggregatedAttendance/lookup  
 * /resources  
 * /resources/{id}  
 * /resources/lookup  
